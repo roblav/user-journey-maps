@@ -1,0 +1,19 @@
+{
+  "name": "js-starterkit",
+  "version": "1.0.0",
+  "description": "Base js starter kit - A check list for all JS projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roblav/jsStarterkit.git"
+  },
+  "author": "Robert Lavender",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roblav/jsStarterkit/issues"
+  },
+  "homepage": "https://github.com/roblav/jsStarterkit#readme"
+}
