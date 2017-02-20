@@ -1,12 +1,18 @@
+var nunjucks  = require('nunjucks');
 var express = require('express');
+var app = express();
 var path = require('path');
 var open = require('open');
 
 var port = 3000;
-var app = express();
+
+nunjucks.configure('src/', {
+  autoescape: true,
+  express   : app
+});
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '../src/index.html'))
+  res.render('index.html', {title : 'My First Nunjucks Page'});
 });
 
 app.listen(port, function(err) {

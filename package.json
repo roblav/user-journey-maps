@@ -33,6 +33,7 @@
     "express": "4.14.0",
     "npm-run-all": "3.1.1",
     "nsp": "2.6.2",
+    "nunjucks": "^3.0.0",
     "open": "0.0.5",
     "phantomjs-prebuilt": "^2.1.14"
   }
