@@ -1,0 +1,12 @@
+{
+  viewports: [
+    {
+      'name': 'mobile',
+      'viewport': {width: 240, height: 320}
+    },
+    {
+      'name': "desktop",
+      'viewport': {width: 1024, height: 768}
+    }
+  ];
+}
