@@ -3,13 +3,16 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var open = require('open');
+var browserSync = require('browser-sync');
 
-var port = process.env.PORT || (process.argv[2] || 3000;
-port = (typeof port === "number") ? port : 3000;
+var port = process.env.PORT || (process.argv[2] || 3002);
+port = (typeof port === "number") ? port : 3002;
 
 nunjucks.configure(path.join(__dirname, '/views/'), {
   autoescape: true,
-  express   : app
+  express: app,
+  noCache: true,
+  watch: true
 });
 
 app.get('/', function(req, res) {
@@ -22,4 +25,12 @@ app.listen(port, function(err) {
   } else {
     open('http://localhost:' + port);
   }
+  browserSync({
+    proxy: 'localhost:' + (port),
+    port: port,
+    ui: false,
+    files: ["app/views/*.html"]
+  });
 });
+
+
