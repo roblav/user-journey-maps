@@ -4,8 +4,8 @@ var app = express();
 var path = require('path');
 var open = require('open');
 var browserSync = require('browser-sync');
-var config = require('./config.js')
-var utils = require('../lib/utils.js')
+var config = require('./config.js');
+var utils = require('../lib/utils.js');
 
 //var port = process.env.PORT || (process.argv[2] || 3000);
 //port = (typeof port === "number") ? port : 3000;
@@ -19,6 +19,10 @@ nunjucks.configure(path.join(__dirname, '/views/'), {
 
 app.get('/', function(req, res) {
   res.render('index.html', {title : 'My First Nunjucks Page'});
+});
+
+app.get('/test', function(req, res) {
+  res.render('test.html', {title : 'My First Nunjucks Page'});
 });
 
 utils.findAvailablePort(app, function (port) {

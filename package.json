@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "Base js starter kit - A check list for all JS projects",
   "scripts": {
-    "prestart": "node app/startMessage.js",
-    "start": "npm-run-all --parallel security-check server",
+    "prestart": "node app/startMessage.js watch:lint",
+    "start": "npm-run-all --parallel security-check watch:server",
     "server": "node app/routes.js",
     "security-check": "nsp check",
     "lint": "jshint --exclude ./node_modules .",
-    "test": "npm run lint"
+    "watch:lint": "watch 'npm run lint' .",
+    "watch:server": "nodemon app/routes.js"
   },
   "repository": {
     "type": "git",
@@ -33,12 +34,14 @@
     "css-loader": "0.25.0",
     "express": "4.14.0",
     "jshint": "^2.9.4",
+    "nodemon": "^1.11.0",
     "npm-run-all": "3.1.1",
     "nsp": "2.6.2",
     "nunjucks": "^3.0.0",
     "open": "0.0.5",
     "phantomjs-prebuilt": "^2.1.14",
     "portscanner": "^2.1.1",
-    "prompt": "^1.0.0"
+    "prompt": "^1.0.0",
+    "watch": "^1.0.2"
   }
 }
