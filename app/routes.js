@@ -6,7 +6,7 @@ var open = require('open');
 
 var port = 3000;
 
-nunjucks.configure('src/', {
+nunjucks.configure(path.join(__dirname, '/views/'), {
   autoescape: true,
   express   : app
 });
