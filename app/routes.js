@@ -4,7 +4,8 @@ var app = express();
 var path = require('path');
 var open = require('open');
 
-var port = 3000;
+var port = process.env.PORT || (process.argv[2] || 3000;
+port = (typeof port === "number") ? port : 3000;
 
 nunjucks.configure(path.join(__dirname, '/views/'), {
   autoescape: true,
