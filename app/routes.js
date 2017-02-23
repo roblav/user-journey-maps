@@ -7,6 +7,11 @@ var browserSync = require('browser-sync');
 var config = require('./config.js');
 var utils = require('../lib/utils.js');
 
+//var webpack = require('webpack');
+var userJourney = require('./userJourney.js');
+
+//var compiler = webpack(config);
+
 //var port = process.env.PORT || (process.argv[2] || 3000);
 //port = (typeof port === "number") ? port : 3000;
 
@@ -17,12 +22,21 @@ nunjucks.configure(path.join(__dirname, '/views/'), {
   watch: true
 });
 
+
 app.get('/', function(req, res) {
   res.render('index.html', {title : 'My First Nunjucks Page'});
 });
 
-app.get('/test', function(req, res) {
-  res.render('test.html', {title : 'My First Nunjucks Page'});
+// Get a collection of images
+var dirPath = path.join( __dirname, 'casperjs/screenshots' )
+
+userJourney.getImageCollection(dirPath).then(function(files){
+  console.log(files)
+});
+
+
+app.get('/impress', function(req, res) {
+  res.render('impress.html', {title : 'My First Nunjucks Page'});
 });
 
 utils.findAvailablePort(app, function (port) {
