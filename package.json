@@ -13,7 +13,7 @@
     "watch": "npm run watch:lint & npm run watch:server",
     "build": "webpack",
     "map": "node app/userJourney.js",
-    "casper": "casperjs app/casperjs/overpaid-3.js"
+    "casper": "casperjs app/casperjs/overpaid-4.js"
   },
   "repository": {
     "type": "git",

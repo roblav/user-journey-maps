@@ -1,6 +1,8 @@
 
 var casper = require('casper').create();
 var overpaid = require('./overpaid-default.js');
+//var overpaid = require('./overpaid-promise.js');
+//var Promise = require('bluebird');
 
 user1 = {
   "nino": "AA000003A",
@@ -25,4 +27,17 @@ var url = "https://www-dev.tax.service.gov.uk/auth-login-stub/sign-in?continue=%
 
 //overpaid(casper, user1, url)
 
-overpaid(casper, user2, url)
+//userJourney.getImageCollection(dirPath).then(function(files){
+//  console.log(files)
+//});
+// takeScreenshots
+
+var test = overpaid(casper, user1, url);
+
+console.log(test);
+console.log('bob');
+
+//overpaid(casper, user2, url, function(screenshots){});
+
+
+

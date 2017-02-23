@@ -1,6 +1,8 @@
 
 module.exports = function(casper, user, url) {
 
+  var screenshots =[];
+
   casper.options.viewportSize = {width: 950, height: 950};
 
   var dirPath = 'app/casperjs/screenshots/'
@@ -18,17 +20,22 @@ module.exports = function(casper, user, url) {
   });
 
   casper.then(function () {
-    this.captureSelector(dirPath + user.status + user.refundStatus + '-1.png', 'main');
+    var imgName = user.status + user.refundStatus + '-1.png';
+    this.captureSelector(dirPath + imgName, 'main');
+    screenshots.push(imgName);
     // Nav to the next page
     this.clickLabel('See why HMRC owe you', 'a');
   });
 
   casper.then(function () {
-    this.captureSelector(dirPath + user.status + user.refundStatus + '-2.png', 'main');
+    var imgName = user.status + user.refundStatus + '-2.png';
+    this.captureSelector(dirPath + imgName, 'main');
+    screenshots.push(imgName);
   });
 
+  // return a list of images
 
-  casper.run();
+  //return casper;
 
-}
+};
 
