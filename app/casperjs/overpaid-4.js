@@ -8,38 +8,19 @@ var casper = require('casper').create({
 //var overpaid = require('./overpaid-promise.js');
 //var Promise = require('bluebird');
 
-var scenarios =  [
-  {
-    "nino": "AA000003A",
-    "name": "Bob Jones",
-    "status": "overpaid-issued",
-    "reasons": "Higher rate relief OP, Job Expenses OP",
-    "refundStatus": "-available",
-    "multi-rec": false
-  },
-  {
-    "nino": "AM242413A",
-    "name": "Todd",
-    "status": "overpaid-issued",
-    "reasons": "Literally every single reason",
-    "refundStatus": "-processing",
-    "multi-rec": false
-  }
-];
-
-
+var userJourneys = require("./userJourneys.json");
 
 var url = "https://www-dev.tax.service.gov.uk/auth-login-stub/sign-in?continue=%2Ftax-you-paid%2Fstatus&accountType=individual"
 //var url = "http://localhost:9949/gg/sign-in?continue=http%3A%2F%2Flocalhost%3A9416%2Ftax-you-paid%2Fstatus&accountType=individual"
 
-function capturePageSelectors (scenarios) {
+casper.options.viewportSize = {width: 950, height: 950};
+var dirPath = 'app/casperjs/screenshots/';
+
+function taxcalcOverpaidJourney (scenarios, dirPath) {
 
   var screenshots =[];
 
-  casper.options.viewportSize = {width: 950, height: 950};
   casper.start();
-
-  var dirPath = 'app/casperjs/screenshots/';
 
   casper.each(scenarios, function (casper, scenario) {
 
@@ -70,7 +51,7 @@ function capturePageSelectors (scenarios) {
   });// end casper.each scenario
 }
 
-capturePageSelectors(scenarios);
+taxcalcOverpaidJourney(userJourneys.scenarios, dirPath);
 
 casper.run(function () {
   console.log('\n======================\nechoFiles has completed \n=======================\n');
