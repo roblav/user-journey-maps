@@ -1,41 +1,37 @@
 
-module.exports = function(casper, user, url) {
+module.exports = function (scenarios, url, dirPath) {
 
   var screenshots =[];
 
-  casper.options.viewportSize = {width: 950, height: 950};
+  casper.start();
 
-  var dirPath = 'app/casperjs/screenshots/'
+  casper.each(scenarios, function (casper, scenario) {
 
-  function ggStartPage(that, nino) {
-    that.fill("form#inputForm", {
-      'authorityId': 'aaa',
-      'confidenceLevel': '200',
-      'taxIdInfo[8].value': nino
-    }, true);
-  }
+    //console.log('LOG> CASPER IS RUNNING - ' + scenario.name);
 
-  casper.start(url, function () {
-    ggStartPage(this, user.nino)
-  });
+    casper.thenOpen(url, function () {
+      this.fill("form#inputForm", {
+        'authorityId': 'aaa',
+        'confidenceLevel': '200',
+        'taxIdInfo[8].value': scenario.nino
+      }, true);
+    });
 
-  casper.then(function () {
-    var imgName = user.status + user.refundStatus + '-1.png';
-    this.captureSelector(dirPath + imgName, 'main');
-    screenshots.push(imgName);
-    // Nav to the next page
-    this.clickLabel('See why HMRC owe you', 'a');
-  });
+    casper.then(function () {
+      var imgName = scenario.status + scenario.refundStatus + '-1.png';
+      this.captureSelector(dirPath + imgName, 'main');
+      screenshots.push(imgName);
+      // Nav to the next page
+      this.clickLabel('See why HMRC owe you', 'a');
+    });
 
-  casper.then(function () {
-    var imgName = user.status + user.refundStatus + '-2.png';
-    this.captureSelector(dirPath + imgName, 'main');
-    screenshots.push(imgName);
-  });
+    casper.then(function () {
+      var imgName = scenario.status + scenario.refundStatus + '-2.png';
+      this.captureSelector(dirPath + imgName, 'main');
+      screenshots.push(imgName);
+    });
 
-  // return a list of images
-
-  //return casper;
+  });// end casper.each scenario
 
 };
 
