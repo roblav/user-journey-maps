@@ -1,0 +1,13 @@
+{
+  "scenarios":  [
+    {
+      "nino": "AA005313A",
+      "name": "BBTESTFIRSTNAME AATESTSURNAME",
+      "status": "underpaid-issued",
+      "reasons": "Pension UP, Tax-Free Allowances UP",
+      "paymentStatus": "-coded-out",
+      "multi-rec": false
+    }
+  ]
+}
+

@@ -16,15 +16,15 @@ module.exports = function (scenarios, url, dirPath) {
     });
 
     casper.then(function () {
-      var imgName = scenario.status + scenario.refundStatus + '-1.png';
+      var imgName = scenario.status + scenario.paymentStatus + '-1.png';
       this.captureSelector(dirPath + imgName, 'main');
       screenshots.push(imgName);
       // Nav to the next page
-      this.clickLabel('See why HMRC owe you', 'a');
+      this.clickLabel('Tell us if you think that the amount you owe is wrong', 'a');
     });
 
     casper.then(function () {
-      var imgName = scenario.status + scenario.refundStatus + '-2.png';
+      var imgName = scenario.status + scenario.paymentStatus + '-2.png';
       this.captureSelector(dirPath + imgName, 'main');
       screenshots.push(imgName);
     });
