@@ -10,7 +10,7 @@
     "lint": "jshint --exclude ./node_modules .",
     "watch:lint": "watch 'npm run lint' .",
     "watch:server": "nodemon app/routes.js",
-    "watch": "npm run watch:lint & npm run watch:server",
+    "watch": "npm run watch:server",
     "build": "webpack",
     "map": "node app/userJourney.js",
     "casper": "casperjs app/casperjs/casperTests.js"
