@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Snap.svg</title>
+
+      <!-- //D7263D - red
+            //F46036 - orange
+            //FFBA49 - yellow
+            //1B998B - green
+            //2E294E - purple
+            -->
+
+        <style>
+
+       body {
+            background-color: #333;
+       }
+       html {
+            background-color: #333;
+        }
+
+        .unslider {
+          position: relative;
+          max-width: 600px;
+          display: inline-block;
+          //float: right;
+          vertical-align: top;
+        }
+        .my-slider {
+          height: 800px;
+        }
+        .my-slider img {
+          width: 100%;
+        }
+
+
+
+        #canvas { background: #999; }
+
+        .node{
+            fill: #1B998B;
+            stroke: #000;
+            stroke-width: 5;
+        }
+       .node:hover,
+       .node--payments:hover,
+       .node--help:hover,
+       .node--choose:hover {
+         cursor: pointer;
+       }
+            .node--payments{
+                fill: #D7263D;
+            }
+            .node--help {
+                fill: #2E294E;
+            }
+            .node--choose {
+                fill: #F46036;
+            }
+
+        .line{
+            stroke: #000;
+            stroke-width: 5;
+        }
+
+        .outline{
+            fill: #F4EEE6;
+            stroke: #60544F;
+            stroke-width: 2pt;
+        }
+
+        .arrow{
+            fill: transparent;
+            stroke: #000;
+            stroke-width: 5;
+        }
+        </style>
+        <link rel="stylesheet" href="tooltip.css">
+      <link rel="stylesheet" href="../public/css/unslider.css">
+      <link rel="stylesheet" href="../public/css/unslider-dots.css">
+      <script src="../public/js/snap.svg-min.js"></script>
+    </head>
+    <body>
+    <div id="tooltip-canvas">
+        <div id="tooltip1" class="tooltip-wrapper">
+            <span class="tooltip">
+                URL:  /status <br />
+                Title: You paid too little Income Tax
+            </span>
+        </div>
+
+        <div id="tooltip1-1" class="tooltip-wrapper">
+            <span class="tooltip">
+                URL:  /amount-is-wrong<br />
+                Title: If you think that the amount you owe is wrong
+            </span>
+        </div>
+
+
+        <div id="tooltip2" class="tooltip-wrapper">
+            <span class="tooltip">
+                URL:  /choose-what-happens-next<br />
+                After validation errors :/payments-options<br />
+                Title: Choose what happens next
+            </span>
+        </div>
+    </div>
+
+        <script>
+
+            function placeDiv(id, x_pos, y_pos) {
+                var d = document.getElementById(id);
+                d.style.position = "absolute";
+                d.style.left = x_pos +'px';
+                d.style.top = y_pos +'px';
+            }
+
+            function sizeDiv(id, width) {
+                var d = document.getElementById(id);
+                d.style.width = width +'px';
+            }
+
+            function showTooltip(that, id) {
+                //console.log(that);
+                var d = document.getElementById(id);
+                d.style.display = 'inline-block';
+                d.style.position = "absolute";
+            }
+
+            var s = Snap(600, 600);
+            s.attr({id: "canvas"});
+
+            s.text(20, 20, "Can Code User Journey")
+
+            //var sx = s.node.attributes.x.value
+            //var sy = s.node.attributes.y.value
+            placeDiv("tooltip-canvas", 0, 0)
+            sizeDiv("tooltip-canvas", 600)
+
+            //console.log(s)
+
+            // ROW 1
+
+            var node1 = s.rect(50, 50, 50, 50, 5, 5).attr({class:"node"})
+            node1.mouseover(function() {
+                showTooltip(this, "tooltip1")
+            }).mouseout(function() {
+                document.getElementById("tooltip1").style.display = 'none'
+            }).mousedown(function() {
+              console.log(this)
+              slider.unslider('animate:0')
+            });
+
+            var arrow1 = s.path("M100,75 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+            var node1_1 = s.rect(150, 50, 50, 50, 5, 5).attr({class:"node node--help"})
+            node1_1.mouseover(function() {
+                showTooltip(this, "tooltip1-1")
+            }).mouseout(function() {
+                document.getElementById("tooltip1-1").style.display = 'none'
+            }).mousedown(function() {
+              console.log(this)
+              slider.unslider('animate:1')
+            });
+
+            // ROW 2
+            var arrow1_1 = s.path("M75,100 l0,30 q0,20 25,18 l42,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+
+            var node2 = s.rect(150, 100 +20, 50, 50, 5, 5).attr({class:"node node--choose"})
+            node2.mouseover(function() {
+                showTooltip(this, "tooltip2")
+            }).mouseout(function() {
+                document.getElementById("tooltip2").style.display = 'none'
+            });
+            var arrow2 = s.path("M200,145 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"});
+
+            var node2_1 = s.rect(250, 120, 50, 50, 5, 5).attr({class:"node node--choose"});
+            var arrow2_1 = s.path("M300,145 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"});
+
+            var node2_2 = s.rect(350, 120, 50, 50, 5, 5).attr({class:"node node--choose"});
+
+            // ROW 3
+
+            var arrow2_1_1 = s.path("M175,170 l0,25 q0,20 25,18 l42,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+
+            var node3 = s.rect(250, 150 +40, 50, 50, 5, 5).attr({class:"node node--payments"});
+            var arrow3 = s.path("M300,215 l143,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+            var node3_1 = s.rect(450, 150 +40, 50, 50, 5, 5).attr({class:"node node--payments"});
+
+            // ROW 4
+
+            var arrow6 = s.path("M275,240 l0,25 q0,20 25,18 l42,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+
+            var node7 = s.rect(350, 200 +60, 50, 50, 5, 5).attr({class:"node node--payments"});
+            var arrow7 = s.path("M400,285 l60,0 q20,0 18,-25 l0,-15 l-10,10 l10,-10 l10,10").attr({class:"arrow"})
+
+            // ROW 5
+            var arrow6_1 = s.path("M275,240 l0,95 q0,20 25,18 l42,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+            var node8 = s.rect(350, 250 +80, 50, 50, 5, 5).attr({class:"node node--payments"});
+
+            var arrow8 = s.path("M400,355 l60,0 q20,0 18,-25 l0,-60").attr({class:"arrow"})
+
+        </script>
+
+    <div class="my-slider">
+      <ul>
+        <li><img src="../public/images/overpaid-issued-available-1.png"></li>
+        <li><img src="../public/images/overpaid-issued-available-2.png"></li>
+        <li><img src="../public/images/overpaid-issued-processing-1.png"></li>
+        <li><img src="../public/images/underpaid-issued-coded-out-1.png"></li>
+        <li><img src="../public/images/underpaid-issued-coded-out-2.png"></li>
+        <li><img src="../public/images/underpaid-issued-outstanding-1.png"></li>
+        <li><img src="../public/images/underpaid-issued-outstanding-2.png"></li>
+        <li><img src="../public/images/underpaid-issued-outstanding-3.png"></li>
+        <li><img src="../public/images/underpaid-issued-outstanding-4.png"></li>
+      </ul>
+    </div>
+
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="../public/js/unslider-min.js"></script>
+
+    <script>
+      jQuery(document).ready(function($) {
+        window.slider = $('.my-slider').unslider({
+          animateHeight: true
+        })
+        //window.slider = $('.my-slider').unslider()
+        //Move nav elements to the top
+        $('.my-slider ~ a, .my-slider ~ nav').insertBefore( ".my-slider" );
+      });
+
+    </script>
+
+    </body>
+</html>
