@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Snap.svg</title>
+        <style>
+        body {
+            background-color: #eee;
+        }
+        #bob {
+            background: #999;
+        }
+
+        .box{
+            fill: red;
+            stroke: blue;
+            stroke-width: 5;
+        }
+
+        .box1{
+            fill: #bada55;
+            stroke: #000;
+            stroke-width: 5;
+        }
+
+        .line{
+            stroke: #000;
+            stroke-width: 5;
+        }
+
+        .outline{
+            fill: #F4EEE6;
+            stroke: #60544F;
+            stroke-width: 2pt;
+        }
+
+        .polygon{
+            fill: transparent;
+            stroke: #000;
+            stroke-width: 5;
+        }
+        </style>
+        <link rel="stylesheet" href="tooltip.css">
+        <script src="../../dist/snap.svg-min.js"></script>
+    </head>
+    <body>
+    <h1>Can Code User Journey</h1>
+        <svg width="0" height="0" style="background-color: #666;">
+            <pattern id="pattern" patternUnits="userSpaceOnUse" x="0" y="0" width="10" height="10" viewBox="0 0 10 10">
+                <path d="M-5,0,10,15M0-5,15,10" stroke="white" stroke-width="5"/>
+            </pattern>
+        </svg>
+        <script>
+
+            function placeDiv(id, x_pos, y_pos) {
+                var d = document.getElementById(id);
+                d.style.position = "absolute";
+                d.style.left = x_pos +'px';
+                d.style.top = y_pos +'px';
+            }
+
+            var s = Snap(500, 500);
+            s.attr({
+                id: "bob"
+            });
+
+            var rect1 = s.rect(50, 50, 50, 50, 5, 5).attr({class:"box1"});
+            rect1.mouseover(function() {
+                document.getElementById("tooltip1").style.display = 'inline-block';
+                var x = this.node.attributes.x.value
+                var y = this.node.attributes.y.value
+                placeDiv("tooltip1", parseInt(x) -25, parseInt(y) -50)
+            }).mouseout(function() {
+                document.getElementById("tooltip1").style.display = 'none';
+            });
+
+            var rect2 = s.rect(50, 120, 50, 50, 5, 5).attr({class:"box"});
+
+            //var line1 = s.path("M10,10L100,100").attr({class:"line"});
+            //var line2 = s.polygon(0,0,0,30,20,15).attr({class:"polygon"});
+
+            //var line1 = s.path("M10,10L100,100").attr({class:"line"});
+
+            var line = s.line(100, 75, 135, 75).attr({class:"line"});
+            var line1 = s.path("M134,75 l0,5 l10,-5 l-10,-5 l0,5").attr({class:"polygon"});
+            var rect3 = s.rect(150, 50, 50, 50, 5, 5).attr({class:"box1"});
+            var line2 = s.path("M200,75 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"polygon"});
+            var rect5 = s.rect(250, 50, 50, 50, 5, 5).attr({class:"box1"});
+
+            // Second Level
+            var line3 = s.path("M200,75 q20,0 18,25 l0,30 q0,20 25,18 l-10,-10 l12,10 l-12,10").attr({class:"polygon"});
+            var rect4 = s.rect(250, 120, 50, 50, 5, 5).attr({class:"box1"});
+            var line4 = s.path("M300,145 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"polygon"});
+            var rect5 = s.rect(350, 120, 50, 50, 5, 5).attr({class:"box1"});
+
+            var line5 = s.path("M275,170 l0,30 q0,20 25,18 l42,0 l-10,-10 l12,10 l-12,10").attr({class:"polygon"})
+
+            var rect6 = s.rect(350, 200, 50, 50, 5, 5).attr({class:"box1"});
+
+        </script>
+
+
+        <div id="tooltip1" class="wrapper-tooltip">
+            <span class="tooltip">
+                URL:  /status <br />
+                Title: You paid too little Income Tax
+            </span>
+        </div>
+
+    </body>
+</html>

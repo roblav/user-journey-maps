@@ -1,0 +1,13 @@
+{
+  "scenarios":  [
+    {
+      "nino": "AH498813A",
+      "name": "COLIN BEZZINA",
+      "status": "underpaid-issued",
+      "reasons": "Pension UP, Tax-Free Allowances UP",
+      "paymentStatus": "-outstanding",
+      "multi-rec": false
+    }
+  ]
+}
+

@@ -47,6 +47,7 @@
     "phantomjs-prebuilt": "^2.1.14",
     "portscanner": "^2.1.1",
     "prompt": "^1.0.0",
+    "raphael": "^2.2.7",
     "watch": "^1.0.2",
     "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.10.1"

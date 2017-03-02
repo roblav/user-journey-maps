@@ -50,6 +50,10 @@ app.get('/', function(req, res) {
   res.render('impress.html', {imgFiles: imgFiles});
 });
 
+app.get('/impress-test', function(req, res) {
+  res.render('impress-test.html', {imgFiles: imgFiles});
+});
+
 utils.findAvailablePort(app, function (port) {
   app.listen(port, function(err) {
     if (err) {
