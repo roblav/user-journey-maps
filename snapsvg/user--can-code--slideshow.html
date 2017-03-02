@@ -3,15 +3,39 @@
     <head>
         <meta charset="utf-8">
         <title>Snap.svg</title>
-        <style>
-            //D7263D - red
+
+      <!-- //D7263D - red
             //F46036 - orange
             //FFBA49 - yellow
             //1B998B - green
             //2E294E - purple
-        body {
-            background-color: #eee;
+            -->
+
+        <style>
+
+       body {
+            background-color: #333;
+       }
+       html {
+            background-color: #333;
         }
+
+        .unslider {
+          position: relative;
+          max-width: 600px;
+          display: inline-block;
+          //float: right;
+          vertical-align: top;
+        }
+        .my-slider {
+          height: 800px;
+        }
+        .my-slider img {
+          width: 100%;
+        }
+
+
+
         #canvas { background: #999; }
 
         .node{
@@ -19,6 +43,12 @@
             stroke: #000;
             stroke-width: 5;
         }
+       .node:hover,
+       .node--payments:hover,
+       .node--help:hover,
+       .node--choose:hover {
+         cursor: pointer;
+       }
             .node--payments{
                 fill: #D7263D;
             }
@@ -47,7 +77,9 @@
         }
         </style>
         <link rel="stylesheet" href="tooltip.css">
-        <script src="../public/js/snap.svg-min.js"></script>
+      <link rel="stylesheet" href="../public/css/unslider.css">
+      <link rel="stylesheet" href="../public/css/unslider-dots.css">
+      <script src="../public/js/snap.svg-min.js"></script>
     </head>
     <body>
     <div id="tooltip-canvas">
@@ -90,14 +122,10 @@
             }
 
             function showTooltip(that, id) {
-                console.log(that);
+                //console.log(that);
                 var d = document.getElementById(id);
                 d.style.display = 'inline-block';
                 d.style.position = "absolute";
-                //var x = that.node.attributes.x.value;
-                //var y = that.node.attributes.y.value;
-                //d.style.left = x +'px';
-                //d.style.top = y +'px';
             }
 
             var s = Snap(600, 600);
@@ -110,7 +138,7 @@
             placeDiv("tooltip-canvas", 0, 0)
             sizeDiv("tooltip-canvas", 600)
 
-            console.log(s)
+            //console.log(s)
 
             // ROW 1
 
@@ -119,6 +147,9 @@
                 showTooltip(this, "tooltip1")
             }).mouseout(function() {
                 document.getElementById("tooltip1").style.display = 'none'
+            }).mousedown(function() {
+              console.log(this)
+              slider.unslider('animate:0')
             });
 
             var arrow1 = s.path("M100,75 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
@@ -127,6 +158,9 @@
                 showTooltip(this, "tooltip1-1")
             }).mouseout(function() {
                 document.getElementById("tooltip1-1").style.display = 'none'
+            }).mousedown(function() {
+              console.log(this)
+              slider.unslider('animate:1')
             });
 
             // ROW 2
@@ -167,6 +201,35 @@
             var arrow8 = s.path("M400,355 l60,0 q20,0 18,-25 l0,-60").attr({class:"arrow"})
 
         </script>
+
+    <div class="my-slider">
+      <ul>
+        <li><img src="../public/images/overpaid-issued-available-1.png"></li>
+        <li><img src="../public/images/overpaid-issued-available-2.png"></li>
+        <li><img src="../public/images/overpaid-issued-processing-1.png"></li>
+        <li><img src="../public/images/underpaid-issued-coded-out-1.png"></li>
+        <li><img src="../public/images/underpaid-issued-coded-out-2.png"></li>
+        <li><img src="../public/images/underpaid-issued-outstanding-1.png"></li>
+        <li><img src="../public/images/underpaid-issued-outstanding-2.png"></li>
+        <li><img src="../public/images/underpaid-issued-outstanding-3.png"></li>
+        <li><img src="../public/images/underpaid-issued-outstanding-4.png"></li>
+      </ul>
+    </div>
+
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="../public/js/unslider-min.js"></script>
+
+    <script>
+      jQuery(document).ready(function($) {
+        window.slider = $('.my-slider').unslider({
+          animateHeight: true
+        })
+        //window.slider = $('.my-slider').unslider()
+        //Move nav elements to the top
+        $('.my-slider ~ a, .my-slider ~ nav').insertBefore( ".my-slider" );
+      });
+
+    </script>
 
     </body>
 </html>

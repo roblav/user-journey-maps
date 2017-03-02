@@ -20,9 +20,9 @@ var dirPath = 'app/casperjs/screenshots/';
 
 casper.start();
 
-//taxcalcOverpaidJourney(overpaidUsers.scenarios, url, dirPath);
+taxcalcOverpaidJourney(overpaidUsers.scenarios, url, dirPath);
 //taxcalcUnderpaidJourney(underpaidUsers.scenarios, url, dirPath);
-taxcalcHelpJourney(vplUser.scenarios, url, dirPath);
+//taxcalcHelpJourney(vplUser.scenarios, url, dirPath);
 
 casper.run(function () {
   console.log('\n======================\nechoFiles has completed \n=======================\n');

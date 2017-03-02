@@ -5,6 +5,20 @@ module.exports = function (scenarios, url, dirPath) {
 
   casper.each(scenarios, function (casper, scenario) {
 
+    var reasonLink
+
+    switch(scenario.refundStatus) {
+      case '-available':
+      case '-processing':
+      case '-not-available':
+        reasonLink = 'See why HMRC owe you'
+        break
+      case '-cheque-sent':
+      case '-claimed':
+        reasonLink = 'See why HMRC owed you'
+        break
+    }
+
     //console.log('LOG> CASPER IS RUNNING - ' + scenario.name);
 
     casper.thenOpen(url, function () {
@@ -19,8 +33,11 @@ module.exports = function (scenarios, url, dirPath) {
       var imgName = scenario.status + scenario.refundStatus + '-1.png';
       this.captureSelector(dirPath + imgName, 'main');
       screenshots.push(imgName);
+    });
+
+    casper.then(function () {
       // Nav to the next page
-      this.clickLabel('See why HMRC owe you', 'a');
+      this.clickLabel(reasonLink, 'a');
     });
 
     casper.then(function () {

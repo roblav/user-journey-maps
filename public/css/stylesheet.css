@@ -1,0 +1,91 @@
+body {
+  background-color: #333;
+}
+
+.col1-2,
+.col2-2,
+.panel {
+  width: 50%;
+  float: left;
+}
+
+/*
+ * Image slider
+ */
+
+.unslider {
+  position: relative;
+  max-width: 600px;
+  display: inline-block;
+//float: right;
+  vertical-align: top;
+}
+.my-slider {
+  height: 800px;
+}
+.my-slider img {
+  width: 100%;
+}
+
+/*
+ * SVG user map
+ */
+
+/* D7263D - red
+ * F46036 - orange
+ * FFBA49 - yellow
+ * 1B998B - green
+ * 2E294E - purple
+ */
+
+#canvas { background: #999; }
+
+.service{
+  fill: #D7263D;
+  stroke: #000;
+  stroke-width: 5;
+  stroke-dasharray: 5;
+}
+
+.node{
+  fill: #1B998B;
+  stroke: #000;
+  stroke-width: 5;
+}
+
+.node.active {
+  stroke: #FFBA49;
+}
+
+.node:hover,
+.node--payments:hover,
+.node--help:hover,
+.node--choose:hover {
+  cursor: pointer;
+}
+.node--payments{
+  fill: #D7263D;
+}
+.node--help {
+  fill: #2E294E;
+}
+.node--choose {
+  fill: #F46036;
+}
+
+.line{
+  stroke: #000;
+  stroke-width: 5;
+}
+
+.outline{
+  fill: #F4EEE6;
+  stroke: #60544F;
+  stroke-width: 2pt;
+}
+
+.arrow{
+  fill: transparent;
+  stroke: #000;
+  stroke-width: 5;
+}
