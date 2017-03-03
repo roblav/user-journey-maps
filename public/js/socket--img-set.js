@@ -13,10 +13,17 @@ $('#checkbox--usermaps input').change(function(){
   //console.log(data)
   socket.emit('checkboxOptions--usermaps', data);
 
+  $('.svg--panel').addClass('hide')
+  for(var str in data) {
+    //remove hide
+    var id = '#'+ str
+    console.log(id)
+    $('#'+ str).toggleClass('hide')
+  }
 });
 
 
-// ## Display persona details
+// ## Display image slider
 // -----------------------------------------
 socket.on('checkboxOptions--usermaps-PUB', function(imgSet){
   //console.log(imgSet)

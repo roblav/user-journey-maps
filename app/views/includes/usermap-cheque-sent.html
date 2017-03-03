@@ -1,30 +1,29 @@
-<div id="issued-available" class="svg--panel hide">
-  <div id="tooltip-canvas">
-    <div id="tooltip1" class="tooltip-wrapper">
+<div id="issued-cheque-sent" class="svg--panel hide">
+  <div id="tooltip-canvas1">
+    <div id="tooltip1_1" class="tooltip-wrapper">
             <span class="tooltip">
                 URL:  /status <br />
                 Title: You paid too much Income Tax
             </span>
     </div>
 
-    <div id="tooltip1-1" class="tooltip-wrapper">
+    <div id="tooltip1_1-1" class="tooltip-wrapper">
             <span class="tooltip">
                 URL:  /reasons<br />
-                Title: Why HMRC owe you
+                Title: Why HMRC owed you
             </span>
     </div>
 
-    <div id="tooltip2" class="tooltip-wrapper">
+    <div id="tooltip1_2" class="tooltip-wrapper">
             <span class="tooltip">
                 SERVICE: Repayments<br />
             </span>
     </div>
   </div>
-  <svg id="mysvg"></svg>
+  <svg id="mysvg1"></svg>
 </div>
 
 <script>
-
   function placeDiv(id, x_pos, y_pos) {
     var d = document.getElementById(id);
     d.style.position = "absolute";
@@ -44,11 +43,11 @@
     d.style.position = "absolute";
   }
 
-  var s = Snap("#mysvg");
-
+  var s = Snap("#mysvg1");
+  //var s = Snap(600, 200);
   s.attr({id: "canvas"});
 
-  s.text(20, 20, "User Journey: Overpaid available")
+  s.text(20, 20, "User Journey: Overpaid cheque sent")
 
   //var sx = s.node.attributes.x.value
   //var sy = s.node.attributes.y.value
@@ -61,27 +60,27 @@
 
   var node1 = s.rect(50, 50, 50, 50, 5, 5).attr({class:"node"})
   node1.mouseover(function() {
-    showTooltip(this, "tooltip1")
+    showTooltip(this, "tooltip1_1")
     this.addClass("active")
   }).mouseout(function() {
-    document.getElementById("tooltip1").style.display = 'none'
+    document.getElementById("tooltip1_1").style.display = 'none'
     this.removeClass("active")
   }).mousedown(function() {
-    console.log(this)
-    slider.unslider('animate:0')
+    //console.log(this)
+    slider.unslider('animate:2')
   });
 
   var arrow1 = s.path("M100,75 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
   var node1_1 = s.rect(150, 50, 50, 50, 5, 5).attr({class:"node node--help"})
   node1_1.mouseover(function() {
-    showTooltip(this, "tooltip1-1")
+    showTooltip(this, "tooltip1_1-1")
     this.addClass("active")
   }).mouseout(function() {
-    document.getElementById("tooltip1-1").style.display = 'none'
+    document.getElementById("tooltip1_1-1").style.display = 'none'
     this.removeClass("active")
   }).mousedown(function() {
-    console.log(this)
-    slider.unslider('animate:1')
+    //console.log(this)
+    slider.unslider('animate:3')
   });
 
   // ROW 2
@@ -89,9 +88,9 @@
 
   var service1 = s.circle(150+25, 100 +20+25, 25, 25, 5, 5).attr({class:"service"})
   service1.mouseover(function() {
-    showTooltip(this, "tooltip2")
+    showTooltip(this, "tooltip1_2")
   }).mouseout(function() {
-    document.getElementById("tooltip2").style.display = 'none'
+    document.getElementById("tooltip1_2").style.display = 'none'
   });
 
 </script>
