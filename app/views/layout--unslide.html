@@ -16,16 +16,18 @@
   <script src="/public/js/unslider-min.js"></script>
 
   <script>
-    jQuery(document).ready(function($) {
-      window.slider = $('.my-slider').unslider({
-        animateHeight: true
-      })
-      //window.slider = $('.my-slider').unslider()
-      //Move nav elements to the top
-      $('.my-slider ~ a, .my-slider ~ nav').insertBefore( ".my-slider" );
-
-    });
-
+    //jQuery(document).ready(function($) {
+    //  window.slider = $('.my-slider').unslider({
+    //    animateHeight: true
+    //  })
+    //  //window.slider = $('.my-slider').unslider()
+    //  //Move nav elements to the top
+    //  //$('.my-slider ~ a, .my-slider ~ nav').insertBefore( ".my-slider" );
+//
+    //});
   </script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/public/js/socket--img-set.js"></script>
+  <script src="/public/js/jquery.serializejson.js"></script>
 </body>
 </html>

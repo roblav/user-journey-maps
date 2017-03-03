@@ -9,17 +9,17 @@
 <div class="col1-2">
   <h3 class="heading-medium">Overpaid User Journey</h3>
 
-  <div class="form-group">
+  <div class="form-group" id="checkbox--usermaps">
     <label class="block-label selection-button-checkbox" for="overpaid-available">
-      <input id="overpaid-available" name="overpaid-available" type="checkbox" value="true">
+      <input id="overpaid-available" name="issued-available" type="checkbox" value="available">
       Available
     </label>
     <label class="block-label selection-button-checkbox" for="overpaid-cheque-sent">
-      <input id="overpaid-cheque-sent" name="overpaid-cheque-sent" type="checkbox" value="true">
+      <input id="overpaid-cheque-sent" name="issued-cheque-sent" type="checkbox" value="cheque-sent">
       Cheque Sent
     </label>
     <label class="block-label selection-button-checkbox" for="overpaid-processing">
-      <input id="overpaid-processing" name="overpaid-processing" type="checkbox" value="true">
+      <input id="overpaid-processing" name="issued-processing" type="checkbox" value="processing">
       Processing
     </label>
   </div>
@@ -35,13 +35,8 @@
 -->
 <div class="col1-2">
   <div class="my-slider">
-    <ul>
-      <li><img src="/public/images/overpaid-issued-available-1.png"></li>
-      <li><img src="/public/images/overpaid-issued-available-2.png"></li>
-      <li><img src="/public/images/overpaid-issued-cheque-sent-1.png"></li>
-      <li><img src="/public/images/overpaid-issued-cheque-sent-2.png"></li>
-      <li><img src="/public/images/overpaid-issued-processing-1.png"></li>
-      <li><img src="/public/images/overpaid-issued-processing-2.png"></li>
+    <ul id="slider-list">
+      <!--<li><img src="/public/images/overpaid-issued-available-1.png"></li>-->
     </ul>
   </div>
 </div>
