@@ -25,6 +25,106 @@
   </div>
 </div>
 
+<div class="panel--svg">
+  <div id="tooltip-canvas">
+    <div id="tooltip1" class="tooltip-wrapper">
+            <span class="tooltip">
+                URL:  /status <br />
+                Title: You paid too much Income Tax
+            </span>
+    </div>
+
+    <div id="tooltip1-1" class="tooltip-wrapper">
+            <span class="tooltip">
+                URL:  /reasons<br />
+                Title: Why HMRC owe you
+            </span>
+    </div>
+
+    <div id="tooltip2" class="tooltip-wrapper">
+            <span class="tooltip">
+                SERVICE: Repayments<br />
+            </span>
+    </div>
+  </div>
+  <svg id="mysvg"></svg>
+</div>
+
+<script>
+
+  function placeDiv(id, x_pos, y_pos) {
+    var d = document.getElementById(id);
+    d.style.position = "absolute";
+    d.style.left = x_pos +'px';
+    d.style.top = y_pos +'px';
+  }
+
+  function sizeDiv(id, width) {
+    var d = document.getElementById(id);
+    d.style.width = width +'px';
+  }
+
+  function showTooltip(that, id) {
+    //console.log(that);
+    var d = document.getElementById(id);
+    d.style.display = 'inline-block';
+    d.style.position = "absolute";
+  }
+
+  var s = Snap("#mysvg");
+
+  s.attr({id: "canvas"});
+
+  s.text(20, 20, "User Journey: Overpaid available")
+
+  //var sx = s.node.attributes.x.value
+  //var sy = s.node.attributes.y.value
+  placeDiv("tooltip-canvas", 0, 0)
+  sizeDiv("tooltip-canvas", 600)
+
+  //console.log(s)
+
+  // ROW 1
+
+  var node1 = s.rect(50, 50, 50, 50, 5, 5).attr({class:"node"})
+  node1.mouseover(function() {
+    showTooltip(this, "tooltip1")
+    this.addClass("active")
+  }).mouseout(function() {
+    document.getElementById("tooltip1").style.display = 'none'
+    this.removeClass("active")
+  }).mousedown(function() {
+    console.log(this)
+    slider.unslider('animate:0')
+  });
+
+  var arrow1 = s.path("M100,75 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+  var node1_1 = s.rect(150, 50, 50, 50, 5, 5).attr({class:"node node--help"})
+  node1_1.mouseover(function() {
+    showTooltip(this, "tooltip1-1")
+    this.addClass("active")
+  }).mouseout(function() {
+    document.getElementById("tooltip1-1").style.display = 'none'
+    this.removeClass("active")
+  }).mousedown(function() {
+    console.log(this)
+    slider.unslider('animate:1')
+  });
+
+  // ROW 2
+  var arrow1_1 = s.path("M75,100 l0,30 q0,20 25,18 l42,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+
+  var service1 = s.circle(150+25, 100 +20+25, 25, 25, 5, 5).attr({class:"service"})
+  service1.mouseover(function() {
+    showTooltip(this, "tooltip2")
+  }).mouseout(function() {
+    document.getElementById("tooltip2").style.display = 'none'
+  });
+
+
+
+</script>
+
 <!--
 <details id="manualUpdate-radios">
   <summary class="summary">Manual Update Messages</summary>

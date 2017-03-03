@@ -46,13 +46,13 @@ socket.on('checkboxOptions--usermaps-PUB', function(imgSet){
   //$('.my-slider').unslider('destroy')
   //$('.my-slider').unslider({animateHeight: true})
   //$('.my-slider').unslider();
-  slider('.my-slider');
+  sliderInit('.my-slider');
   //Move nav elements to the top
   $('.my-slider ~ a, .my-slider ~ nav').insertBefore( ".my-slider" );
 });
 
 /* Unslider */
-function slider(divClass) {
+function sliderInit(divClass) {
 
   // destroy if exists first
   if ($(divClass).hasClass('unslider-horizontal')){
@@ -62,7 +62,7 @@ function slider(divClass) {
   }
 
   // init the slider
-  $(divClass).unslider({
+  window.slider = $(divClass).unslider({
     animateHeight   : true
   });
 }

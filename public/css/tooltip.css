@@ -1,0 +1,43 @@
+#tooltip-canvas,
+#tooltip-canvas1 {
+    position: relative;
+}
+
+.tooltip-wrapper {
+    position: relative;
+    display: none;
+}
+
+.tooltip {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #f38cca;
+    color: #000;
+
+    font-family: arial;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.25em;
+
+    -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+    -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+    -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+    -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+
+.tooltip:after {
+    content: " ";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+
+    margin-left: -13px;
+    width: 0;
+    height: 0;
+
+    border-left: solid transparent 10px;
+    border-right: solid transparent 10px;
+    border-top: solid #f38cca 10px;
+}
