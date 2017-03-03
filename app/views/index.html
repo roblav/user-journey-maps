@@ -1,8 +1,51 @@
-{% extends "layout.html" %}
+{% extends "layout--unslide.html" %}
 
 {% block main %}
 
-<h1>Hello World!</h1>
-<h2>{{ title }}</h2>
+<h1 class="heading-large">User Maps</h1>
+
+{% import "templates/form-elements.html" as forms %}
+
+<div class="col1-2">
+  <h3 class="heading-medium">Overpaid User Journey</h3>
+
+  <div class="form-group">
+    <label class="block-label selection-button-checkbox" for="overpaid-available">
+      <input id="overpaid-available" name="overpaid-available" type="checkbox" value="true">
+      Available
+    </label>
+    <label class="block-label selection-button-checkbox" for="overpaid-cheque-sent">
+      <input id="overpaid-cheque-sent" name="overpaid-cheque-sent" type="checkbox" value="true">
+      Cheque Sent
+    </label>
+    <label class="block-label selection-button-checkbox" for="overpaid-processing">
+      <input id="overpaid-processing" name="overpaid-processing" type="checkbox" value="true">
+      Processing
+    </label>
+  </div>
+</div>
+
+<!--
+<details id="manualUpdate-radios">
+  <summary class="summary">Manual Update Messages</summary>
+  <div class="form-group">
+    {{ forms.inputCheckboxManualUpdate( title = 'Manual Telephone', name = 'manual[phone][]' ) }}
+  </div>
+</details>
+-->
+<div class="col1-2">
+  <div class="my-slider">
+    <ul>
+      <li><img src="/public/images/overpaid-issued-available-1.png"></li>
+      <li><img src="/public/images/overpaid-issued-available-2.png"></li>
+      <li><img src="/public/images/overpaid-issued-cheque-sent-1.png"></li>
+      <li><img src="/public/images/overpaid-issued-cheque-sent-2.png"></li>
+      <li><img src="/public/images/overpaid-issued-processing-1.png"></li>
+      <li><img src="/public/images/overpaid-issued-processing-2.png"></li>
+    </ul>
+  </div>
+</div>
+
+
 
 {% endblock %}

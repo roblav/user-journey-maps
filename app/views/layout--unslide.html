@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="/public/css/application.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/public/css/govuk-template.css" media="screen" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/public/css/unslider.css">
+  <link rel="stylesheet" href="/public/css/unslider-dots.css">
+  <link rel="stylesheet" href="/public/css/stylesheet.css">
+
+</head>
+<body>
+  {% block main %}{% endblock %}
+
+  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="/public/js/unslider-min.js"></script>
+
+  <script>
+    jQuery(document).ready(function($) {
+      window.slider = $('.my-slider').unslider({
+        animateHeight: true
+      })
+      //window.slider = $('.my-slider').unslider()
+      //Move nav elements to the top
+      $('.my-slider ~ a, .my-slider ~ nav').insertBefore( ".my-slider" );
+
+    });
+
+  </script>
+</body>
+</html>

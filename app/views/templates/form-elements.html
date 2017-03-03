@@ -1,0 +1,54 @@
+{% macro inputChoice( type, title, name, val1 = 'True', val2 = 'False' ) %}
+
+<div class="form-group">
+  <fieldset class="inline">
+
+    <legend>{{ title }}</legend>
+
+    <label class="block-label selection-button-{{ type }}" for="{{ type }}-{{ name }}-{{ val1 }}">
+      <input id="{{ type }}-{{ name }}-{{ val1 }}" type="{{ type }}" name="{{ name }}" value="{{ val1 }}">
+      {{ val1 }}
+    </label>
+
+    <label class="block-label selection-button-{{ type }}" for="{{ type }}-{{ name }}-{{ val2 }}">
+      <input id="{{ type }}-{{ name }}-{{ val2 }}" type="{{ type }}" name="{{ name }}" value="{{ val2 }}">
+      {{ val2 }}
+    </label>
+
+  </fieldset>
+</div>
+
+{% endmacro %}
+
+{% macro inputRadio( type = 'radio', name, val = 'True') %}
+
+    <label class="block-label selection-button-{{ type }}" for="{{ type }}-{{ val }}">
+      <input id="{{ type }}-{{ val }}" type="{{ type }}" name="{{ name }}" value="{{ val }}">
+      {{ val }}
+    </label>
+
+{% endmacro %}
+
+{% macro inputCheckboxManualUpdate( type = 'checkbox', title, name, val1 = 'Notification Date Defined', val2 = 'Update Action Date Defined' ) %}
+<details>
+  <summary class="summary--black">{{ title }}</summary>
+<div class="form-group">
+  <fieldset>
+    <legend class="visually-hidden">{{ title }}</legend>
+
+    <label class="block-label selection-button-{{ type }}" for="{{ type }}-{{ name }}-{{ val1 }}">
+      <input id="{{ type }}-{{ name }}-{{ val1 }}" type="{{ type }}" name="{{ name }}" value="{{ val1 }}">
+      {{ val1 }}
+    </label>
+    <label class="block-label selection-button-{{ type }}" for="{{ type }}-{{ name }}-{{ val2 }}">
+      <input id="{{ type }}-{{ name }}-{{ val2 }}" type="{{ type }}" name="{{ name }}" value="{{ val2 }}">
+      {{ val2 }}
+    </label>
+
+  </fieldset>
+</div>
+  </details>
+
+{% endmacro %}
+
+

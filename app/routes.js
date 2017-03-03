@@ -47,8 +47,12 @@ userJourney.getImageCollection(dirPath).then(function(files){
 });
 
 app.get('/', function(req, res) {
-  res.render('impress.html', {imgFiles: imgFiles});
+  res.render('index.html', {imgFiles: imgFiles});
 });
+
+//app.get('/', function(req, res) {
+//  res.render('impress.html', {imgFiles: imgFiles});
+//});
 
 app.get('/impress-test', function(req, res) {
   res.render('impress-test.html', {imgFiles: imgFiles});
