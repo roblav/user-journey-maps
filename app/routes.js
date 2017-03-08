@@ -5,7 +5,9 @@ var path = require('path');
 var open = require('open');
 var browserSync = require('browser-sync');
 var config = require('./config.js');
+var snapSVGutils = require('./snapSVG--utils.js');
 var utils = require('../lib/utils.js');
+
 
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
@@ -57,11 +59,32 @@ var imgFiles = [
 
 
 userJourney.getImageCollection(dirPath).then(function(files){
-  console.log(files)
+  //console.log(files)
 });
 
 app.get('/', function(req, res) {
   res.render('index.html', {imgFiles: imgFiles});
+});
+
+// var node1 = s.rect(50, 50, 50, 50, 5, 5).attr({class:"node"})
+
+var script = [
+  { type: "text", x: 20, y: 20, val: "User Journey: Overpaid available" },
+  { type: "rect", name: "node1", x: 50, y: 50, width: 50, height: 50, rx: 5, ry: 5, attr: { class:"node"} },
+  { type: "rect", name: "node1_1", x: 150, y: 50, width: 50, height: 50, rx: 5, ry: 5, attr: { class:"node node--help" } },
+  { type: "path", name: "arrow1", val: "M100,75 l43,0 l-10,-10 l12,10 l-12,10", attr: { class:"arrow" } }
+]
+
+var grid = snapSVGutils.generateGrid(10, 10, 50, 50)
+//console.log(grid)
+
+// Add grid to script
+script = script.concat(grid)
+
+//console.log(script)
+
+app.get('/test', function(req, res) {
+  res.render('test.html', {script: script});
 });
 
 //app.get('/', function(req, res) {

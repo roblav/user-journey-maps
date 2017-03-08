@@ -6,7 +6,7 @@
 
 {% import "templates/form-elements.html" as forms %}
 
-<div class="col1-2">
+<div class="nav--draw">
   <h3 class="heading-medium">Overpaid User Journey</h3>
 
   <div class="form-group" id="checkbox--usermaps">
@@ -23,17 +23,35 @@
       Processing
     </label>
   </div>
+  <h3 class="heading-medium">Underpaid User Journey</h3>
+
+  <div class="form-group" id="checkbox--usermaps">
+    <label class="block-label selection-button-checkbox" for="underpaid-can-code">
+      <input id="underpaid-can-code" name="can-code" type="checkbox" value="can-code">
+      Can Code
+    </label>
+    <label class="block-label selection-button-checkbox" for="underpaid-vpl">
+      <input id="underpaid-vpl" name="vpl" type="checkbox" value="vpl">
+      VPL
+    </label>
+    <label class="block-label selection-button-checkbox" for="underpaid-collected">
+      <input id="underpaid-collected" name="collected" type="checkbox" value="collected">
+      Collected
+    </label>
+  </div>
 </div>
 
 <div class="panel--svg">
 
-{% include "includes/usermap-available.html" %}
+  {% include "includes/usermap-available.html" %}
 
-{% include "includes/usermap-cheque-sent.html" %}
+  {% include "includes/usermap-cheque-sent.html" %}
 
-{% include "includes/usermap-processing.html" %}
+  {% include "includes/usermap-processing.html" %}
 
 </div>
+
+{% include "includes/usermap-up-cancode.html" %}
 
 <!--
 <details id="manualUpdate-radios">

@@ -1,8 +1,80 @@
-{% extends "layout.html" %}
+{% extends "layout--svg.html" %}
 
 {% block main %}
 
 <h1>Test</h1>
 <h2>{{ title }}</h2>
+
+<script>
+  var s = Snap(500, 800);
+  s.attr({id: "canvas1"})
+
+  var node3 = s.rect(50, 150, 50, 50, 5, 5).attr({class:"node"})
+  var count = 0
+  node3.mousedown(function() {
+      var name = "node3_" + count
+      name = this.clone()
+      name.drag()
+      count++
+    });
+  //s.{{ script.type }}({{ script.x }}, {{ script.y }}, "{{ script.val }}")
+
+  {% for item in script %}
+
+    {% if item.type == "text" %}
+
+      s.{{ item.type }}({{ item.x }}, {{ item.y }}, "{{ item.val }}")
+
+    {% elif item.type == "line" %}
+
+      {{  "var " + item.name + "=" if item.name }} s.{{ item.type }}(
+        {{ item.xStart }},
+        {{ item.yStart }},
+        {{ item.xEnd }},
+        {{ item.yEnd }}
+      )
+      // Deal with any attributes
+      {% if item.attr %}
+        {% for prop, value in item.attr %}
+          {{item.name}}.attr({ {{prop}}:"{{value}}" })
+        {% endfor %}
+      {% endif %}
+
+    {% elif item.type == "rect" %}
+
+      {{  "var " + item.name + "=" if item.name }} s.{{ item.type }}(
+        {{ item.x }},
+        {{ item.y }},
+        {{ item.width }},
+        {{ item.height }},
+        {{ item.rx }},
+        {{ item.ry }}
+      )
+
+      // Deal with any attributes
+      {% if item.attr %}
+        {% for prop, value in item.attr %}
+          {{item.name}}.attr({ {{prop}}:"{{value}}" })
+        {% endfor %}
+      {% endif %}
+
+    {% elif item.type == "path" %}
+
+      {{  "var " + item.name + "=" if item.name }} s.{{ item.type }}( "{{ item.val }}" )
+
+      // Deal with any attributes
+      {% if item.attr %}
+        {% for prop, value in item.attr %}
+          {{item.name}}.attr({ {{prop}}:"{{value}}" })
+        {% endfor %}
+      {% endif %}
+
+
+    {% endif %}
+
+
+  {% endfor %}
+
+</script>
 
 {% endblock %}
