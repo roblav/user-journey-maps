@@ -119,6 +119,10 @@ io.on('connection', function(socket) {
     //console.log('user disconnected');
   });
 
+  socket.on('usermaps--svg', function(data) {
+    console.log(data)
+  })
+
   // Get user input for User Maps
   // now return the correct manulUpdateMsg message
   socket.on('checkboxOptions--usermaps', function(data) {

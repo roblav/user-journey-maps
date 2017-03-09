@@ -5,29 +5,59 @@
 <h1>Test</h1>
 <h2>{{ title }}</h2>
 
-<script>
-  var s = Snap(500, 800);
-  s.attr({id: "canvas1"})
+<!-- http://robsneuron.blogspot.co.uk/2013/11/using-snapsvg-to-create-box-that-snaps.html -->
 
-  var node3 = s.rect(50, 150, 50, 50, 5, 5).attr({class:"node"})
-  var count = 0
-  node3.mousedown(function() {
-      var name = "node3_" + count
-      name = this.clone()
-      name.drag()
-      count++
-    });
+<script>
+  var paper = Snap(500, 800);
+  paper.attr({id: "canvas1"})
+  var gridSize = 50;
+
+  var gr_toolbox = paper.g().attr({id:"gr_toolbox"});
+  var gr_toolbox_bkg = paper.rect(40, 140, 70, 200)
+  gr_toolbox.add(gr_toolbox_bkg)
+
+  var nodeTemplate = paper.rect(50, 150, 50, 50, 5, 5).attr({class:"node"})
+  gr_toolbox.add(nodeTemplate)
+  var nodeCount = 0
+  nodeTemplate.mousedown(function() {
+    var name = "node1_" + nodeCount
+    name = this.clone()
+    name.drag( function (dx, dy, x, y, e) {
+      //console.log(dx, dy, x, y, e)
+      var xSnap = Snap.snapTo(gridSize, x, 100000000);
+      // y-gridSize/2 - For accuracy of mouse drag position
+      var ySnap = Snap.snapTo(gridSize, y-gridSize/2, 100000000);
+      this.attr({
+        x: xSnap,
+        y: ySnap
+      });
+    })
+    nodeCount++
+  });
+
+  var arrowTemplate = paper.path("M50,225 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+  gr_toolbox.add(arrowTemplate)
+  var arrowCount = 0
+  arrowTemplate.mousedown(function() {
+    var name = "arrow1_" + arrowCount
+    name = this.clone()
+    //gr_1.add(name)
+    name.drag()
+
+    arrowCount++
+  });
+
   //s.{{ script.type }}({{ script.x }}, {{ script.y }}, "{{ script.val }}")
 
   {% for item in script %}
 
     {% if item.type == "text" %}
 
-      s.{{ item.type }}({{ item.x }}, {{ item.y }}, "{{ item.val }}")
+      paper.{{ item.type }}({{ item.x }}, {{ item.y }}, "{{ item.val }}")
 
     {% elif item.type == "line" %}
 
-      {{  "var " + item.name + "=" if item.name }} s.{{ item.type }}(
+      {{  "var " + item.name + "=" if item.name }} paper.{{ item.type }}(
         {{ item.xStart }},
         {{ item.yStart }},
         {{ item.xEnd }},
@@ -42,7 +72,7 @@
 
     {% elif item.type == "rect" %}
 
-      {{  "var " + item.name + "=" if item.name }} s.{{ item.type }}(
+      {{  "var " + item.name + "=" if item.name }} paper.{{ item.type }}(
         {{ item.x }},
         {{ item.y }},
         {{ item.width }},
@@ -60,7 +90,7 @@
 
     {% elif item.type == "path" %}
 
-      {{  "var " + item.name + "=" if item.name }} s.{{ item.type }}( "{{ item.val }}" )
+      {{  "var " + item.name + "=" if item.name }} paper.{{ item.type }}( "{{ item.val }}" )
 
       // Deal with any attributes
       {% if item.attr %}
@@ -76,5 +106,9 @@
   {% endfor %}
 
 </script>
+
+  <button id="submit">Submit</button>
+
+
 
 {% endblock %}
