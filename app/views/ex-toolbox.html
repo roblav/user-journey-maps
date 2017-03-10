@@ -10,34 +10,28 @@
 
 <script>
 
-  var gridSize = 25
-  var makeArrow = {
-    active: false,
-    draw: function(instruction){
-      return paper.path(instruction).attr({class:"arrow"});
-    }
-  }
-  var path  = null;
+  var gridSize = 25;
 
-
-  var toolbox = Snap(100, 400)
+  var toolbox = Snap(100, 400);
   toolbox.attr({id: "toolbox"})
 
-  var gr_toolbox = toolbox.g().attr({id:"gr_toolbox"})
+  var gr_toolbox = toolbox.g().attr({id:"gr_toolbox"});
 
-  var nodeTemplate = toolbox.rect(0, 0, 50, 50, 5, 5).attr({id: "nodeTemplate"})
+  var nodeTemplate = toolbox.rect(0, 0, 50, 50, 5, 5).attr({
+    id: "nodeTemplate"
+  })
 
   nodeTemplate.toDefs()
-  var nodeButton = toolbox.use("nodeTemplate").attr({x: 20, y: 20});
-  nodeButton.attr({class:"node"});
-  nodeButton.mouseover(function(){
+  var node1 = toolbox.use("nodeTemplate").attr({x: 20, y: 20});
+  node1.attr({class:"node"});
+  node1.mouseover(function(){
     this.addClass("active")
   }).mouseout(function(){
     this.removeClass("active")
   })
 
   var nodeCount = 0
-  nodeButton.click(function(){
+  node1.click(function(){
     // When clicked add a shape to the paper canvas
     // Give each of them a unique id
     var name = "node" + nodeCount
@@ -68,86 +62,24 @@
     nodeCount++
   })
 
-  var arrowTemplate = toolbox.path("M0,0 l43,0 l-10,-10 l12,10 l-12,10").attr({id: "arrowTemplate"})
-  arrowTemplate.toDefs()
-  var arrowButton = toolbox.use("arrowTemplate").attr({x: 20, y: 110});
-  arrowButton.attr({class:"arrow"});
-  arrowButton.click(function(){
-    makeArrow.active = !makeArrow.active
-    //console.log(makeArrow.active)
-    this.toggleClass('active')
-  })
+  var arrowTemplate = toolbox.path("M20,110 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+  gr_toolbox.add(arrowTemplate)
+  var arrowCount = 0
+  arrowTemplate.mousedown(function() {
+    var name = "arrow1_" + arrowCount
+    name = this.clone()
+    //gr_1.add(name)
+    name.drag()
 
+    arrowCount++
+  });
 
   var paper = Snap(500, 800);
   paper.attr({id: "canvas1"})
+  console.log(paper.data())
   var orig = {
     x: 0,
     y: 0
-  }
-
-  paper.mousedown(function(obj){
-    //console.log(obj)
-    if(makeArrow.active) {
-      //Get start point for path
-      var xStart = obj.offsetX
-      var yStart = obj.offsetY
-      //console.log(xStart, yStart)
-      instruction = "M"+xStart+" "+yStart+"L90 90"
-
-      //Create arrow
-      //p1 = makeArrow.draw(instruction)
-      //var cords = obj.offsetX +","+ obj.offsetY
-      startDrawing(obj)
-      //p2 = paper.line(cords).attr({class:"arrow"});
-    }
-  })
-
-  //Create an arrow using the mouse
-  paper.mousemove(function(obj){
-    //console.log(obj)
-    //Change the end point of the arrow
-    //Get start point for path
-    var xEnd = obj.offsetX
-    var yEnd = obj.offsetY
-    //Get p1
-    if(typeof p2 !== 'undefined'){
-      console.log(p2)
-      p2.attr({
-        x2:xEnd,
-        y2:yEnd
-      });
-    }
-  })
-
-  function startDrawing(event) {
-    //var cords = obj.offsetX +","+ obj.offsetY
-    //console.log(event.offsetX, event.offsetY)
-    path = paper.line(event.offsetX, event.offsetY, event.offsetX, event.offsetY).attr({class:"arrow"});
-    paper.mousemove(function(obj){ updateDrawing(obj) })
-    paper.mouseup(function(obj){ stopDrawing(obj) })
-    //paper.mouseout(function(obj){ stopDrawing(obj) })
-  }
-  // UPDATE DRAWING ========================================================
-  function updateDrawing(obj) {
-    //path.addPoint(Point.parse(event));
-    //Get end point for path
-    var xEnd = obj.offsetX
-    var yEnd = obj.offsetY
-    path.attr({ x2:xEnd, y2:yEnd });
-  }
-
-  // STOP DRAWING ==========================================================
-  function stopDrawing(event) {
-    //Get end point for path
-    //remove event listner
-    paper.unmousemove()
-    paper.unmouseup()
-    //paper.unmouseout()
-    //console.log(event.offsetX, event.offsetY)
-    var xEnd = event.offsetX
-    var yEnd = event.offsetY
-    path.attr({ x2:xEnd, y2:yEnd });
   }
 
   //s.{{ script.type }}({{ script.x }}, {{ script.y }}, "{{ script.val }}")
