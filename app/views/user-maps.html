@@ -1,0 +1,74 @@
+{% extends "layout--unslide.html" %}
+
+{% block main %}
+
+<h1 class="heading-large">User Maps</h1>
+
+{% import "templates/form-elements.html" as forms %}
+
+<div class="nav--draw">
+  <h3 class="heading-medium">Overpaid User Journey</h3>
+
+  <div class="form-group" id="checkbox--usermaps">
+    <label class="block-label selection-button-checkbox" for="overpaid-available">
+      <input id="overpaid-available" name="issued-available" type="checkbox" value="available">
+      Available
+    </label>
+    <label class="block-label selection-button-checkbox" for="overpaid-cheque-sent">
+      <input id="overpaid-cheque-sent" name="issued-cheque-sent" type="checkbox" value="cheque-sent">
+      Cheque Sent
+    </label>
+    <label class="block-label selection-button-checkbox" for="overpaid-processing">
+      <input id="overpaid-processing" name="issued-processing" type="checkbox" value="processing">
+      Processing
+    </label>
+  </div>
+  <h3 class="heading-medium">Underpaid User Journey</h3>
+
+  <div class="form-group" id="checkbox--usermaps">
+    <label class="block-label selection-button-checkbox" for="underpaid-can-code">
+      <input id="underpaid-can-code" name="can-code" type="checkbox" value="can-code">
+      Can Code
+    </label>
+    <label class="block-label selection-button-checkbox" for="underpaid-vpl">
+      <input id="underpaid-vpl" name="vpl" type="checkbox" value="vpl">
+      VPL
+    </label>
+    <label class="block-label selection-button-checkbox" for="underpaid-collected">
+      <input id="underpaid-collected" name="collected" type="checkbox" value="collected">
+      Collected
+    </label>
+  </div>
+</div>
+
+<div class="panel--svg">
+
+  {% include "includes/usermap-available.html" %}
+
+  {% include "includes/usermap-cheque-sent.html" %}
+
+  {% include "includes/usermap-processing.html" %}
+
+</div>
+
+{% include "includes/usermap-up-cancode.html" %}
+
+<!--
+<details id="manualUpdate-radios">
+  <summary class="summary">Manual Update Messages</summary>
+  <div class="form-group">
+    {{ forms.inputCheckboxManualUpdate( title = 'Manual Telephone', name = 'manual[phone][]' ) }}
+  </div>
+</details>
+-->
+<div class="col1-2">
+  <div class="my-slider">
+    <ul id="slider-list">
+      <!--<li><img src="/public/images/overpaid-issued-available-1.png"></li>-->
+    </ul>
+  </div>
+</div>
+
+
+
+{% endblock %}

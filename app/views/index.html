@@ -1,73 +1,246 @@
-{% extends "layout--unslide.html" %}
+{% extends "layout--svg.html" %}
 
 {% block main %}
 
-<h1 class="heading-large">User Maps</h1>
+<h1>Test</h1>
+<h2>{{ title }}</h2>
 
-{% import "templates/form-elements.html" as forms %}
+<!-- http://robsneuron.blogspot.co.uk/2013/11/using-snapsvg-to-create-box-that-snaps.html -->
 
-<div class="nav--draw">
-  <h3 class="heading-medium">Overpaid User Journey</h3>
 
-  <div class="form-group" id="checkbox--usermaps">
-    <label class="block-label selection-button-checkbox" for="overpaid-available">
-      <input id="overpaid-available" name="issued-available" type="checkbox" value="available">
-      Available
-    </label>
-    <label class="block-label selection-button-checkbox" for="overpaid-cheque-sent">
-      <input id="overpaid-cheque-sent" name="issued-cheque-sent" type="checkbox" value="cheque-sent">
-      Cheque Sent
-    </label>
-    <label class="block-label selection-button-checkbox" for="overpaid-processing">
-      <input id="overpaid-processing" name="issued-processing" type="checkbox" value="processing">
-      Processing
-    </label>
-  </div>
-  <h3 class="heading-medium">Underpaid User Journey</h3>
+<script>
 
-  <div class="form-group" id="checkbox--usermaps">
-    <label class="block-label selection-button-checkbox" for="underpaid-can-code">
-      <input id="underpaid-can-code" name="can-code" type="checkbox" value="can-code">
-      Can Code
-    </label>
-    <label class="block-label selection-button-checkbox" for="underpaid-vpl">
-      <input id="underpaid-vpl" name="vpl" type="checkbox" value="vpl">
-      VPL
-    </label>
-    <label class="block-label selection-button-checkbox" for="underpaid-collected">
-      <input id="underpaid-collected" name="collected" type="checkbox" value="collected">
-      Collected
-    </label>
-  </div>
-</div>
+  // GLOBAL VARIABLES ==========================================================
 
-<div class="panel--svg">
+  var gridSize = 25
+  var makeArrow = {
+    active: false,
+    draw: function(instruction){
+      return paper.path(instruction).attr({class:"arrow"});
+    }
+  }
+  var path  = null;
 
-  {% include "includes/usermap-available.html" %}
+  // TOOLBOX ==========================================================
 
-  {% include "includes/usermap-cheque-sent.html" %}
+  var toolbox = Snap(100, 400)
+  toolbox.attr({id: "toolbox"})
 
-  {% include "includes/usermap-processing.html" %}
+  var gr_toolbox = toolbox.g().attr({id:"gr_toolbox"})
 
-</div>
+  var nodeTemplate = toolbox.rect(0, 0, 50, 50, 5, 5).attr({id: "nodeTemplate"})
+  nodeTemplate.toDefs()
+  var circleTemplate = toolbox.circle(0, 0, 15, 15).attr({id: "circleTemplate"})
+  circleTemplate.toDefs()
 
-{% include "includes/usermap-up-cancode.html" %}
+  var nodeButton = toolbox.use("nodeTemplate").attr({x: 20, y: 20});
+  nodeButton.attr({class:"node"});
+  nodeButton.mouseover(function(){
+    this.addClass("active")
+  }).mouseout(function(){
+    this.removeClass("active")
+  })
 
-<!--
-<details id="manualUpdate-radios">
-  <summary class="summary">Manual Update Messages</summary>
-  <div class="form-group">
-    {{ forms.inputCheckboxManualUpdate( title = 'Manual Telephone', name = 'manual[phone][]' ) }}
-  </div>
-</details>
--->
-<div class="col1-2">
-  <div class="my-slider">
-    <ul id="slider-list">
-      <!--<li><img src="/public/images/overpaid-issued-available-1.png"></li>-->
-    </ul>
-  </div>
-</div>
+  var nodeCount = 0
+  nodeButton.click(function(){
+    // When clicked add a shape to the paper canvas
+    // Give each of them a unique id
+    var name = "node" + nodeCount
+    name = paper.use("nodeTemplate")
+    name.attr({class:"node"})
+    name.drag(
+      function (dx, dy, x, y, e) {
+        var xSnap = Snap.snapTo(gridSize, orig.x + dx, 100000000);
+        var ySnap = Snap.snapTo(gridSize, orig.y + dy, 100000000);
+        this.attr({
+          x: xSnap,
+          y: ySnap
+        });
+      },
+      function (x, y, e) {
+        orig.x = e.toElement.x.baseVal.value;
+        orig.y = e.toElement.y.baseVal.value;
+    })
+    name.mouseover(function() {
+      this.addClass('active')
+    }).mouseout(function() {
+      this.removeClass('active')
+    }).mousedown(function() {
+      this.addClass('activeDrag')
+    }).mouseup(function() {
+      this.removeClass('activeDrag')
+    })
+    nodeCount++
+  })
+
+  var circleButton = toolbox.use("circleTemplate").attr({x: 45, y: 170, class:"node"});
+  circleButton.mouseover(function(){this.addClass("active")}).mouseout(function(){this.removeClass("active")})
+  circleButton.click(function(){
+    //Toggle hide class on grid group
+    grid.toggleClass('hide')
+  })
+
+  var arrowTemplate = toolbox.path("M0,0 l43,0 l-10,-10 l12,10 l-12,10").attr({id: "arrowTemplate"})
+  arrowTemplate.toDefs()
+  var arrowButton = toolbox.use("arrowTemplate").attr({x: 20, y: 110});
+  arrowButton.attr({class:"arrow"});
+  arrowButton.click(function(){
+    makeArrow.active = !makeArrow.active
+    //console.log(makeArrow.active)
+    this.toggleClass('active')
+  })
+
+  // STAGE ==========================================================
+
+  var paper = Snap(500, 800);
+  paper.attr({id: "canvas1"})
+  var orig = {
+    x: 0,
+    y: 0
+  }
+
+  var grid = paper.g().attr({id:"grid"});
+
+  {% for item in script %}
+
+    // TEXT ======
+    {% if item.type == "text" %}
+
+      paper.{{ item.type }}({{ item.x }}, {{ item.y }}, "{{ item.val }}")
+
+    // LINE ======
+    {% elif item.type == "line" %}
+
+     {{  "var " + item.name + "=" if item.name }} paper.{{ item.type }}(
+       {{ item.xStart }},
+       {{ item.yStart }},
+       {{ item.xEnd }},
+       {{ item.yEnd }}
+     )
+      // Deal with any attributes
+      {% if item.attr %}
+        {% for prop, value in item.attr %}
+          {{item.name}}.attr({ {{prop}}:"{{value}}" })
+        {% endfor %}
+      {% endif %}
+
+      grid.add( {{item.name}} );
+
+    // RECT ======
+    {% elif item.type == "rect" %}
+
+      {{  "var " + item.name + "=" if item.name }} paper.{{ item.type }}(
+        {{ item.x }},
+        {{ item.y }},
+        {{ item.width }},
+        {{ item.height }},
+        {{ item.rx }},
+        {{ item.ry }}
+      )
+
+      // Deal with any attributes
+      {% if item.attr %}
+        {% for prop, value in item.attr %}
+          {{item.name}}.attr({ {{prop}}:"{{value}}" })
+        {% endfor %}
+      {% endif %}
+
+    // PATH ======
+    {% elif item.type == "path" %}
+
+      {{  "var " + item.name + "=" if item.name }} paper.{{ item.type }}( "{{ item.val }}" )
+
+      // Deal with any attributes
+      {% if item.attr %}
+        {% for prop, value in item.attr %}
+          {{item.name}}.attr({ {{prop}}:"{{value}}" })
+        {% endfor %}
+      {% endif %}
+
+    {% endif %}
+
+
+  {% endfor %}
+
+
+  // CREATE A MARKER ARROW ==========================================================
+
+  var arrowMarker = paper.path("M10,10 l-10,-10 l12,10 l-12,10").attr({class: "arrow"}).transform("scale(0.2)")
+  var marker = arrowMarker.marker(0,0, 15,15, 2,2)
+
+  paper.mousedown(function(obj){
+    //console.log(obj)
+    if(makeArrow.active) {
+      //Get start point for path
+      var xStart = obj.offsetX
+      var yStart = obj.offsetY
+      //console.log(xStart, yStart)
+      instruction = "M"+xStart+" "+yStart+"L90 90"
+
+      //Create arrow
+      //p1 = makeArrow.draw(instruction)
+      //var cords = obj.offsetX +","+ obj.offsetY
+      startDrawing(obj)
+      //p2 = paper.line(cords).attr({class:"arrow"});
+    }
+  })
+
+  //Create an arrow using the mouse
+  paper.mousemove(function(obj){
+    //console.log(obj)
+    //Change the end point of the arrow
+    //Get start point for path
+    var xEnd = obj.offsetX
+    var yEnd = obj.offsetY
+    //Get p1
+    if(typeof p2 !== 'undefined'){
+      console.log(p2)
+      p2.attr({
+        x2:xEnd,
+        y2:yEnd
+      });
+    }
+  })
+
+  function startDrawing(event) {
+    //var cords = obj.offsetX +","+ obj.offsetY
+    //console.log(event.offsetX, event.offsetY)
+    path = paper.line(event.offsetX, event.offsetY, event.offsetX, event.offsetY).attr({class:"arrow", markerEnd:marker});
+    paper.mousemove(function(obj){ updateDrawing(obj) })
+    paper.mouseup(function(obj){ stopDrawing(obj) })
+    //paper.mouseout(function(obj){ stopDrawing(obj) })
+  }
+  // UPDATE DRAWING ========================================================
+  function updateDrawing(obj) {
+    //path.addPoint(Point.parse(event));
+    //Get end point for path
+    var xEnd = obj.offsetX
+    var yEnd = obj.offsetY
+    path.attr({ x2:xEnd, y2:yEnd });
+  }
+
+  // STOP DRAWING ==========================================================
+  function stopDrawing(event) {
+    //Get end point for path
+    //remove event listner
+    paper.unmousemove()
+    paper.unmouseup()
+    //paper.unmouseout()
+    //console.log(event.offsetX, event.offsetY)
+    var xEnd = event.offsetX
+    var yEnd = event.offsetY
+    path.attr({ x2:xEnd, y2:yEnd });
+  }
+
+
+  //path1 = paper.line(25,200,200,200).attr( { class:"arrow", markerEnd:marker } );
+
+  //s.{{ script.type }}({{ script.x }}, {{ script.y }}, "{{ script.val }}")
+
+
+</script>
+
+  <button id="submit">Submit</button>
 
 
 

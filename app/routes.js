@@ -43,16 +43,16 @@ var grid = snapSVGutils.generateGrid(20, 20, 25, 25)
 //console.log(grid)
 
 // Add grid to script
-script = script.concat(grid)
+script = grid.concat(script)
 
 //console.log(script)
 
 app.get('/', function(req, res) {
-  res.render('node-groups.html', {script: script});
+  res.render('index.html', {script: script});
 });
 
 app.get('/test', function(req, res) {
-  res.render('index.html', {script: script});
+  res.render('user-maps.html', {script: script});
 });
 
 
