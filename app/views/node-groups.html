@@ -7,35 +7,62 @@
 
 <!-- http://robsneuron.blogspot.co.uk/2013/11/using-snapsvg-to-create-box-that-snaps.html -->
 
+
 <script>
-  var paper = Snap(500, 800);
-  paper.attr({id: "canvas1"})
-  var gridSize = 50;
 
-  var gr_toolbox = paper.g().attr({id:"gr_toolbox"});
-  var gr_toolbox_bkg = paper.rect(40, 140, 70, 200)
-  gr_toolbox.add(gr_toolbox_bkg)
+  var gridSize = 25;
 
-  var nodeTemplate = paper.rect(50, 150, 50, 50, 5, 5).attr({class:"node"})
-  gr_toolbox.add(nodeTemplate)
+  var toolbox = Snap(100, 400);
+  toolbox.attr({id: "toolbox"})
+
+  var gr_toolbox = toolbox.g().attr({id:"gr_toolbox"});
+
+  var nodeTemplate = toolbox.rect(0, 0, 50, 50, 5, 5).attr({
+    id: "nodeTemplate"
+  })
+
+  nodeTemplate.toDefs()
+  var node1 = toolbox.use("nodeTemplate").attr({x: 20, y: 20});
+  node1.attr({class:"node"});
+  node1.mouseover(function(){
+    this.addClass("active")
+  }).mouseout(function(){
+    this.removeClass("active")
+  })
+
   var nodeCount = 0
-  nodeTemplate.mousedown(function() {
-    var name = "node1_" + nodeCount
-    name = this.clone()
-    name.drag( function (dx, dy, x, y, e) {
-      //console.log(dx, dy, x, y, e)
-      var xSnap = Snap.snapTo(gridSize, x, 100000000);
-      // y-gridSize/2 - For accuracy of mouse drag position
-      var ySnap = Snap.snapTo(gridSize, y-gridSize/2, 100000000);
-      this.attr({
-        x: xSnap,
-        y: ySnap
-      });
+  node1.click(function(){
+    // When clicked add a shape to the paper canvas
+    // Give each of them a unique id
+    var name = "node" + nodeCount
+    name = paper.use("nodeTemplate")
+    name.attr({class:"node"})
+    name.drag(
+      function (dx, dy, x, y, e) {
+        var xSnap = Snap.snapTo(gridSize, orig.x + dx, 100000000);
+        var ySnap = Snap.snapTo(gridSize, orig.y + dy, 100000000);
+        this.attr({
+          x: xSnap,
+          y: ySnap
+        });
+      },
+      function (x, y, e) {
+        orig.x = e.toElement.x.baseVal.value;
+        orig.y = e.toElement.y.baseVal.value;
+    })
+    name.mouseover(function() {
+      this.addClass('active')
+    }).mouseout(function() {
+      this.removeClass('active')
+    }).mousedown(function() {
+      this.addClass('activeDrag')
+    }).mouseup(function() {
+      this.removeClass('activeDrag')
     })
     nodeCount++
-  });
+  })
 
-  var arrowTemplate = paper.path("M50,225 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
+  var arrowTemplate = toolbox.path("M20,110 l43,0 l-10,-10 l12,10 l-12,10").attr({class:"arrow"})
   gr_toolbox.add(arrowTemplate)
   var arrowCount = 0
   arrowTemplate.mousedown(function() {
@@ -46,6 +73,14 @@
 
     arrowCount++
   });
+
+  var paper = Snap(500, 800);
+  paper.attr({id: "canvas1"})
+  console.log(paper.data())
+  var orig = {
+    x: 0,
+    y: 0
+  }
 
   //s.{{ script.type }}({{ script.x }}, {{ script.y }}, "{{ script.val }}")
 

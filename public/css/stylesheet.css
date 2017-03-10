@@ -6,6 +6,11 @@ html, body {
   display: none;
 }
 
+#toolbox {
+  background: #666;
+  float: left;
+}
+
 .nav--draw{
   position: relative;
   float: left;
@@ -69,7 +74,7 @@ html, body {
   background: #999;
 }
 #canvas1 {
-  width: 100%;
+  width: 80%;
   height: 400px;
   background: #999;
 }
@@ -93,7 +98,8 @@ html, body {
   stroke-width: 5;
 }
 
-.node.active {
+.node.active,
+.node.activeDrag{
   stroke: #FFBA49;
 }
 
