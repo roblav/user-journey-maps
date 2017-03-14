@@ -4,7 +4,7 @@
   "description": "Base js starter kit - A check list for all JS projects",
   "scripts": {
     "prestart": "node app/startMessage.js",
-    "start": "npm-run-all --parallel security-check watch",
+    "start": "npm-run-all --parallel security-check watch build-css watch-css",
     "server": "node app/routes.js",
     "security-check": "nsp check",
     "lint": "jshint --exclude ./node_modules .",
@@ -13,7 +13,8 @@
     "watch": "npm run watch:server",
     "build": "webpack",
     "map": "node app/userJourney.js",
-    "casper": "casperjs app/casperjs/casperTests.js"
+    "build-css": "node-sass --importer node_modules/node-sass-glob-importer/dist/cli.js --include-path scss app/scss/stylesheet.scss public/css/stylesheet.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,9 @@
     "css-loader": "0.25.0",
     "express": "4.14.0",
     "jshint": "^2.9.4",
+    "node-sass": "^4.5.0",
+    "node-sass-glob": "^1.0.4",
+    "node-sass-glob-importer": "^3.0.2",
     "nodemon": "^1.11.0",
     "npm-run-all": "3.1.1",
     "nsp": "2.6.2",
