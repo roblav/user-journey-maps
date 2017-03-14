@@ -73,12 +73,27 @@
     nodeCount++
   })
 
-  var circleButton = toolbox.use("circleTemplate").attr({x: 45, y: 170, class:"node"});
-  circleButton.mouseover(function(){this.addClass("active")}).mouseout(function(){this.removeClass("active")})
-  circleButton.click(function(){
-    //Toggle hide class on grid group
+  // GRID TOGGLE BUTTON ==========================================================
+
+  var toggleBtn_bkg = toolbox.rect(8, 8, 74, 44, 20).attr({class: 'node'});
+  var toggleBtn = toolbox.circle(30, 30, 20).attr({class: 'circle'})
+
+  toggleBtn.click(function(e){
+    this.toggle = !this.toggle
+    this.animate({cx:!this.toggle ? 30 : 60}, 500)
+    grid.toggleClass('show')
     grid.toggleClass('hide')
+    if(this.toggle){
+      toggleBtn_bkg.addClass('toggle')
+    } else {
+      toggleBtn_bkg.removeClass('toggle')
+    }
   })
+  var g_toggleBtn = toolbox.g();
+  g_toggleBtn.add(toggleBtn_bkg, toggleBtn).attr({id:'g-toggleBtn'});
+  g_toggleBtn.transform('t0,200');
+
+
 
   var arrowTemplate = toolbox.path("M0,0 l43,0 l-10,-10 l12,10 l-12,10").attr({id: "arrowTemplate"})
   arrowTemplate.toDefs()
@@ -99,7 +114,7 @@
     y: 0
   }
 
-  var grid = paper.g().attr({id:"grid"});
+  var grid = paper.g().attr({id:"grid", class:"show"});
 
   {% for item in script %}
 
