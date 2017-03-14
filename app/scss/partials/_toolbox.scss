@@ -8,3 +8,15 @@
   stroke: #000;
   stroke-width: 1;
 }
+
+.toolbox-label--bkg {
+  fill: #999;
+  stroke: #333;
+  stroke-width: 1;
+}
+
+.toolbox-label--text {
+  fill: #fff;
+  alignment-baseline: middle;
+  text-anchor: middle;
+}
