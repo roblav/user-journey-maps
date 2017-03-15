@@ -16,6 +16,19 @@
   float: left;
   margin-left: 1em; }
 
+.icon-button {
+  transition: stroke 0.5s ease;
+  stroke: transparent;
+  stroke-width: 1;
+  fill: transparent; }
+
+.icon-button.active {
+  stroke: #999;
+  stroke-width: 1; }
+
+.icon-button:hover {
+  cursor: pointer; }
+
 /*
  * Image slider
  */
