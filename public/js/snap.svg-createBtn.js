@@ -28,13 +28,21 @@ function createBtn(name, title, iconTransform, transform, pathArray, onMouseDown
   }).mouseout(function(e){
     icon_bkg.toggleClass('active')
     icon.attr({ fill: "#000" })
+  }).mousedown(function(e){
+    // Add mousedown event listner to all nodes
+    var allNodes = paper.selectAll(".node")
+    allNodes.forEach(function(el) {
+      el.mousedown(function(event){
+        console.log(this)
+      })
+    })
+    //If a mousedown function has been added to the button, trigger it here
+    if(typeof onMouseDown !== 'undefined'){
+      onMouseDown()
+    }
   })
 
-  if(typeof onMouseDown !== 'undefined'){
-    GR_icon_button.mousedown(function(e){
-      onMouseDown()
-    })
-  }
+
 
   return GR_icon_button
 }
