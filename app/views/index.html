@@ -278,11 +278,17 @@
     // function createBtn(name, title, transform, path)
     var onMouseDown = '{{ icon.mousedown }}';
     if(typeof onMouseDown !== 'undefined'){
-      onMouseDown = function(){
+      onMouseDown = function(el){
         {{icon.mousedown|safe}}
       }
     }
-    createBtn('{{ icon.name }}', '{{ icon.title }}','{{ icon.iconTransform }}', '{{ icon.transform }}', pathArray, onMouseDown);
+    var callback = '{{ icon.iconcallback }}';
+    if(typeof callback !== 'undefined'){
+      callback = function(el){
+        {{icon.iconcallback|safe}}
+      }
+    }
+    createBtn('{{ icon.name }}', '{{ icon.title }}','{{ icon.iconTransform }}', '{{ icon.transform }}', pathArray, onMouseDown, callback);
   {% endfor %}
 
 </script>

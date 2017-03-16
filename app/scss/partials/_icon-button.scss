@@ -11,3 +11,12 @@
 .icon-button:hover {
   cursor: pointer;
 }
+
+.icon{
+  //fill: rgba(0, 0, 0, 1);
+  stroke-width: 1;
+}
+
+.icon.active{
+  fill: rgba(255, 255, 255, 1);
+}

@@ -29,6 +29,12 @@
 .icon-button:hover {
   cursor: pointer; }
 
+.icon {
+  stroke-width: 1; }
+
+.icon.active {
+  fill: white; }
+
 /*
  * Image slider
  */
