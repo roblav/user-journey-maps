@@ -262,17 +262,29 @@
 <script src="public/js/snap.svg-createBtn.js"></script>
 <script src="public/js/snap-svg--components/defs.js"></script>
 <script src="public/js/snap-svg--components/toggleBtn.js"></script>
+<!--
 <script src="public/js/snap-svg--components/iconEdit.js"></script>
 <script src="public/js/snap-svg--components/iconDelete.js"></script>
 <script src="public/js/snap-svg--components/iconClear.js"></script>
+-->
 
 <script>
-  // self executing function here
-  (function() {
-    // your page initialization code here
-    // the DOM will be available here
-    createBtn('pencil', 'Edit node','t25,150')
-  })();
+  {% for icon in icons %}
+    //Loop over the array creating a group of the paths
+    var pathArray = "{{ icon.path }}".split(',');
+    //TODO
+    // I'm unsure about having the transform as part of the data
+    //Maybe this should be automated from some position settings.
+    // function createBtn(name, title, transform, path)
+    var onMouseDown = '{{ icon.mousedown }}';
+    if(typeof onMouseDown !== 'undefined'){
+      onMouseDown = function(){
+        {{icon.mousedown|safe}}
+      }
+    }
+    createBtn('{{ icon.name }}', '{{ icon.title }}','{{ icon.iconTransform }}', '{{ icon.transform }}', pathArray, onMouseDown);
+  {% endfor %}
+
 </script>
 
 
