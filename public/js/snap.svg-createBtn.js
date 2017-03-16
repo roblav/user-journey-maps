@@ -58,7 +58,7 @@ function createBtn(name, title, iconTransform, transform, pathArray, onMouseDown
       el.unmousedown()
     })
 
-    console.log(this)
+    //console.log(this)
 
     if(icon.selected){
       // Add mousedown event listener to all nodes

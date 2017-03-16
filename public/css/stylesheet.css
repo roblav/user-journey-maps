@@ -69,6 +69,18 @@
 .node--choose:hover {
   cursor: pointer; }
 
+.node--teal {
+  fill: #1B998B; }
+
+.node--red {
+  fill: #D7263D; }
+
+.node--purple {
+  fill: #2E294E; }
+
+.node--orange {
+  fill: #F46036; }
+
 .node--payments {
   fill: #D7263D; }
 
@@ -81,6 +93,9 @@
 .node.active,
 .node.activeDrag {
   stroke: #FFBA49; }
+
+.node.selected {
+  stroke: #fff; }
 
 .service {
   fill: #D7263D;

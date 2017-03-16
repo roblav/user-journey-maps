@@ -1,5 +1,5 @@
 .node{
-  fill: #1B998B;
+  fill: #1B998B; //teal
   stroke: #000;
   stroke-width: 5;
 }
@@ -10,14 +10,27 @@
 .node--choose:hover {
   cursor: pointer;
 }
+.node--teal{
+  fill: #1B998B; //teal
+}
+.node--red{
+  fill: #D7263D; //red
+}
+.node--purple {
+  fill: #2E294E; //purple
+}
+.node--orange {
+  fill: #F46036; //orange
+}
+
 .node--payments{
-  fill: #D7263D;
+  fill: #D7263D; //red
 }
 .node--help {
-  fill: #2E294E;
+  fill: #2E294E; //purple
 }
 .node--choose {
-  fill: #F46036;
+  fill: #F46036; //orange
 }
 
 .node.active,
@@ -25,8 +38,12 @@
   stroke: #FFBA49;
 }
 
+.node.selected {
+  stroke: #fff;
+}
+
 .service {
-  fill: #D7263D;
+  fill: #D7263D; //red
   stroke: #000;
   stroke-width: 5;
   stroke-dasharray: 5;
