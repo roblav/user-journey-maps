@@ -12,7 +12,7 @@ var icon_edit = toolbox.use('#icon_edit')
 var icon_edit_button_title = Snap.parse('<title>Edit Node</title>');
 var icon_edit_button = toolbox.use('#btnBkg').attr({class:'icon-button'}).append(icon_edit_button_title);
 
-var gr_icon_edit_button = toolbox.g(icon_edit,icon_edit_button).transform('t25,150')
+var gr_icon_edit_button = toolbox.g(icon_edit,icon_edit_button).transform('t25,250')
 
 gr_icon_edit_button.mouseover(function(e){
   icon_edit_button.toggleClass('active')

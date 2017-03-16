@@ -24,7 +24,7 @@
   // TOOLBOX ==========================================================
 
   var toolbox = Snap(100, 600)
-  toolbox.attr({id: "toolbox"})
+  toolbox.attr({id: 'toolbox'})
   var gr_toolbox = toolbox.g().attr({id:"gr_toolbox"})
 
   // LABEL - TOOLBOX ==================================================
@@ -257,15 +257,23 @@
 
   //s.{{ script.type }}({{ script.x }}, {{ script.y }}, "{{ script.val }}")
 
-
 </script>
 
+<script src="public/js/snap.svg-createBtn.js"></script>
 <script src="public/js/snap-svg--components/defs.js"></script>
 <script src="public/js/snap-svg--components/toggleBtn.js"></script>
 <script src="public/js/snap-svg--components/iconEdit.js"></script>
 <script src="public/js/snap-svg--components/iconDelete.js"></script>
 <script src="public/js/snap-svg--components/iconClear.js"></script>
-<script src="public/js/snap-svg--components/iconPencil.js"></script>
+
+<script>
+  // self executing function here
+  (function() {
+    // your page initialization code here
+    // the DOM will be available here
+    createBtn('pencil', 'Edit node','t25,150')
+  })();
+</script>
 
 
 <button id="submit">Submit</button>

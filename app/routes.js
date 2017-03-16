@@ -36,7 +36,8 @@ nunjucks.configure(path.join(__dirname, '/views/'), {
 var script = [
   { type: "rect", name: "node1", x: 50, y: 50, width: 50, height: 50, rx: 5, ry: 5, attr: { class:"node"} },
   { type: "rect", name: "node1_1", x: 150, y: 50, width: 50, height: 50, rx: 5, ry: 5, attr: { class:"node node--help" } },
-  { type: "path", name: "arrow1", val: "M100,75 l43,0 l-10,-10 l12,10 l-12,10", attr: { class:"arrow" } }
+  { type: "path", name: "arrow1", val: "M100,75 l43,0 l-10,-10 l12,10 l-12,10", attr: { class:"arrow" } },
+  { type: "button", name: "pencil", val: "M27 0c2.761 0 5 2.239 5 5 0 1.126-0.372 2.164-1 3l-2 2-7-7 2-2c0.836-0.628 1.874-1 3-1zM2 23l-2 9 9-2 18.5-18.5-7-7-18.5 18.5zM22.362 11.362l-14 14-1.724-1.724 14-14 1.724 1.724z", attr: { class:"arrow" } }
 ]
 
 var grid = snapSVGutils.generateGrid(20, 20, 25, 25)
