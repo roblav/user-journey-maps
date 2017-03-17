@@ -7,7 +7,7 @@ function createNode(uid) {
   var url = paper.text(0,40,'URL: {url here}').attr({class: 'node-text', id:'text-url-'+uid})
   var g_details = paper.g(title, url).attr({id:'g-node_details-'+uid, class:'hide-text'})
   var g = paper.g()
-  g.add(rect, g_details).attr({id:'g-node-'+uid}).drag()
+  g.add(rect, g_details).attr({id:'g-node-'+uid, class:'g-node'}).drag()
 
   g.mouseover(function(e){
     //console.log(this)
@@ -18,9 +18,11 @@ function createNode(uid) {
     g_details.toggleClass("hide-text")
   })
 
+  g.editActive = false
+
 //On click get the coords of the rect
   g.mousedown(function(e){
-    //console.log(this)
+    console.log(this.editActive)
     //this.matrix.e this.matrix.f
     //console.log(e)
     //this.toggle = !this.toggle
@@ -29,7 +31,7 @@ function createNode(uid) {
     //Get the current node-detail values and populate the form
     var url_val = url.node.innerHTML
     var title_val = title.node.innerHTML
-    console.log(el)
+    //console.log(el)
     var page_title = document.querySelector('input#js-page_title')
     page_title.value = title_val
     var page_url = document.querySelector('input#js-url')

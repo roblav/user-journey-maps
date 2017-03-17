@@ -52,7 +52,8 @@ function createBtn(name, title, iconTransform, transform, pathArray, onMouseDown
     //this.toggle = !this.toggle
 
     //Grab set of all nodes
-    var allNodes = paper.selectAll(".node")
+    var allNodes = paper.selectAll(".g-" +
+    "node")
 
     allNodes.forEach(function(el) {
       el.unmousedown()
