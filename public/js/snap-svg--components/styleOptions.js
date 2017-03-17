@@ -49,4 +49,4 @@ function createStyleButton(matrix, color){
 var g_toggleBtn = toolbox.g()
 g_toggleBtn.add(label_style__bkg, label_style__text, style1, style2, style3, style4).attr({id:'g-styleOptions'})
 
-g_toggleBtn.transform('t0,460')
+g_toggleBtn.transform('t0,360')

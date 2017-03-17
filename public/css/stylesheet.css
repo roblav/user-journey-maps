@@ -14,17 +14,18 @@ form#node-details {
   top: 100px;
   left: 300px;
   float: left;
-  width: 300px;
+  width: 230px;
   padding: .5em;
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: #fff; }
   form#node-details .form-group {
     font-family: arial;
+    font-size: 12px;
     margin: 5px 0; }
   form#node-details label {
     display: inline-block;
-    width: 100px;
+    width: 70px;
     text-align: right; }
   form#node-details button {
     float: right; }
@@ -242,7 +243,6 @@ html, body {
 
 #canvas1 {
   width: 80%;
-  height: 400px;
   background: #999; }
 
 .outline {

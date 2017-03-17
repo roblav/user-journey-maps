@@ -21,4 +21,4 @@ toggleBtn.click(function(e){
 var g_toggleBtn = toolbox.g()
 g_toggleBtn.add(label_toggleBtn__bkg, label_toggleBtn__text, toggleBtn_bkg, toggleBtn).attr({id:'g-toggleBtn'})
 
-g_toggleBtn.transform('t0,370')
+g_toggleBtn.transform('t0,270')
