@@ -4,7 +4,7 @@ form#node-details {
   left: 300px;
   float: left;
 
-  width: 300px;
+  width: 0px;
   padding: .5em;
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -12,11 +12,12 @@ form#node-details {
 
   .form-group {
     font-family: arial;
+    font-size: 12px;
     margin: 5px 0;
   }
   label {
      display: inline-block;
-     width: 100px;
+     width: 70px;
      text-align: right;
    }
   button {
