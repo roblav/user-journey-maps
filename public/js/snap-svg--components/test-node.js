@@ -1,9 +1,4 @@
-// TEMPLATES ==========================================================
-var template_button = toolbox.rect(0, 0, 50, 50, 5).attr({id:'btnBkg'});
-template_button.toDefs();
-
-
-// NODE WITH DETAILS ==========================================================
+// Test NODE ==========================================================
 
 var rect = paper.rect(50, 150, 50, 50, 5).attr({class: 'node'});
 var title = paper.text(50,120,'Title: Overpaid').attr({class: 'node-text', id:'text-title'});
@@ -11,9 +6,9 @@ var url = paper.text(50,140,'URL: /status').attr({class: 'node-text', id:'text-u
 var g_details = paper.g(title, url).attr({id:'g-node_details', class:'hide-text'});
 var g = paper.g();
 g.add(rect, g_details).attr({id:'g-node'});
-
+//.mouseover scale g_details
 g.mouseover(function(e){
-  console.log(this)
+  //console.log('here')
   g_details.toggleClass("hide-text");
   g_details.toggleClass("show-text");
 }).mouseout(function(e){
@@ -22,7 +17,7 @@ g.mouseover(function(e){
 })
 
 //On click get the coords of the rect
-g.click(function(e){
+rect.click(function(e){
   //this.toggle = !this.toggle
   //Select form
   var el = document.getElementById("node-details");
@@ -44,5 +39,3 @@ g.click(function(e){
   el.classList.toggle("show-form");
   el.classList.toggle("hide-form");
 })
-
-g.toDefs()
