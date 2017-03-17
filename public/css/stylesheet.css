@@ -9,6 +9,51 @@
 .arrow:hover {
   cursor: pointer; }
 
+form#node-details {
+  position: absolute;
+  top: 100px;
+  left: 300px;
+  float: left;
+  width: 300px;
+  padding: .5em;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff; }
+  form#node-details .form-group {
+    font-family: arial;
+    margin: 5px 0; }
+  form#node-details label {
+    display: inline-block;
+    width: 100px;
+    text-align: right; }
+  form#node-details button {
+    float: right; }
+  form#node-details .arrow-left {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid white;
+    margin-left: -18px;
+    margin-top: 15px; }
+  form#node-details.show-form {
+    opacity: 1.0;
+    transition: transform 1s, opacity 1s;
+    transform: translate(0px, -50px); }
+  form#node-details.hide-form {
+    opacity: 0.0;
+    transition: transform 1s, opacity 1s;
+    transform: translate(0px, 50px); }
+
+.shadow {
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  /* Firefox 3.5 - 3.6 */
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */ }
+
 .col1-2,
 .col2-2 {
   position: relative;
@@ -57,6 +102,20 @@
 .line--grid {
   stroke: rgba(102, 102, 102, 0.22);
   stroke-width: 1; }
+
+.node-text {
+  fill: #000;
+  font-family: arial;
+  font-size: 12px;
+  text-align: center; }
+
+.hide-text {
+  opacity: 0.25;
+  transition: opacity 1s; }
+
+.show-text {
+  opacity: 1.0;
+  transition: opacity 1s; }
 
 .node {
   fill: #1B998B;

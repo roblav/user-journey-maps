@@ -1,0 +1,16 @@
+.node-text {
+  fill: #000;
+  font-family: arial;
+  font-size: 12px;
+  text-align: center;
+}
+
+.hide-text {
+  opacity: 0.25;
+  transition: opacity 1s;
+}
+
+.show-text {
+  opacity: 1.0;
+  transition: opacity 1s;
+}
