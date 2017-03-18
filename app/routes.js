@@ -46,8 +46,8 @@ var grid = snapSVGutils.generateGrid(20, 20, 25, 25)
 script = grid.concat(script)
 
 var icons = [
-  { type: "button", name: "pencil", title: "Edit Node", iconTransform: 't10,7', transform: 't0,150', path: ["M27 0c2.761 0 5 2.239 5 5 0 1.126-0.372 2.164-1 3l-2 2-7-7 2-2c0.836-0.628 1.874-1 3-1zM2 23l-2 9 9-2 18.5-18.5-7-7-18.5 18.5zM22.362 11.362l-14 14-1.724-1.724 14-14 1.724 1.724z"],
-    iconcallback: "el.editActive = true"},
+  { type: "button", name: "pencil", title: "Edit Node", iconTransform: 't10,7', transform: 't0,150', path: ["M27 0c2.761 0 5 2.239 5 5 0 1.126-0.372 2.164-1 3l-2 2-7-7 2-2c0.836-0.628 1.874-1 3-1zM2 23l-2 9 9-2 18.5-18.5-7-7-18.5 18.5zM22.362 11.362l-14 14-1.724-1.724 14-14 1.724 1.724z"]
+  },
   { type: "button", name: "arrows", title: "Create Arrows", iconTransform: 't10,10', transform: 't50,150', path: [
       "M32 0h-13l5 5-6 6 3 3 6-6 5 5z",
       "M32 32v-13l-5 5-6-6-3 3 6 6-5 5z",

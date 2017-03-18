@@ -75,6 +75,7 @@ function createBtn(name, title, iconTransform, transform, pathArray, onMouseDown
     } else{
       allNodes.forEach(function(el) {
         el.unmousedown()
+        el.drag()
       })
     }
 
