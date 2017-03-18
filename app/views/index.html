@@ -53,7 +53,7 @@
   //Get val for
   var details = {}
   details.label = $('.toolbox-label--text').val();
-  console.log(details.label)
+  //console.log(details.label)
   //url.node.innerHTML = "URL: "+details.url;
 
   // TEMPLATES ==================================================
@@ -304,6 +304,15 @@
     editForm.style.top = posY+"px"
     editForm.classList.toggle("show-form")
     editForm.classList.toggle("hide-form")
+    if($(editForm).hasClass('hide-form')){
+      //console.log('Do something')
+      //Wait 1 second and move form off screen
+      setTimeout(function(){
+        editForm.style.top = "-300px"
+      }, 1000);
+
+    }
+
   }
 
   {% for icon in icons %}

@@ -3,8 +3,8 @@
 var label_toggleBtn__bkg = toolbox.rect(0, 0, 100, 30, 0).attr({class: 'toolbox-label--bkg'})
 var label_toggleBtn__text = toolbox.text("50%", 15,'Toggle Grid').attr({class: 'toolbox-label--text'})
 
-var toggleBtn_bkg = toolbox.rect(18, 40, 64, 34, 15).attr({class: 'toggleBtn_bkg'})
-var toggleBtn = toolbox.circle(35, 57, 15).attr({class: 'toggleBtn'})
+var toggleBtn_bkg = toolbox.rect(23, 41, 54, 22, 10).attr({class: 'toggleBtn_bkg'})
+var toggleBtn = toolbox.circle(35, 52, 10).attr({class: 'toggleBtn'})
 
 toggleBtn.click(function(e){
   this.toggle = !this.toggle

@@ -75,7 +75,22 @@ function createBtn(name, title, iconTransform, transform, pathArray, onMouseDown
     } else{
       allNodes.forEach(function(el) {
         el.unmousedown()
-        el.drag()
+        //unmousedown removes the drag method as well so we need to re-apply it here
+        el.drag(
+          function (dx, dy, x, y, e) {
+            //console.log(dx, dy, x, y, e)
+            var xSnap = Snap.snapTo(gridSize, orig.x + dx, 100000000);
+            var ySnap = Snap.snapTo(gridSize, orig.y + dy, 100000000);
+            //Get the group
+            g.transform('t'+xSnap+','+ySnap)
+            //console.log(xSnap,ySnap)
+          },
+          function (x, y, e) {
+            //console.log(e)
+            orig.x = e.target.parentElement.transform.baseVal[0].matrix.e;
+            orig.y = e.target.parentElement.transform.baseVal[0].matrix.f;
+          }
+        )
       })
     }
 
