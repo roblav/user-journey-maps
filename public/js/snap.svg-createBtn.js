@@ -101,6 +101,5 @@ function createBtn(name, title, iconTransform, transform, pathArray, onMouseDown
   })
 
 
-
   return GR_icon_button
 }

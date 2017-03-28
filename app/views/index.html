@@ -65,7 +65,7 @@
 
   // NODE BUTTON ==================================================
 
-  var nodeButton = toolbox.use("nodeTemplate").transform('t35,45 s0.5').attr({class:"node"});
+  var nodeButton = toolbox.use("nodeTemplate").transform('t15,45 s0.5').attr({class:"node"});
   //nodeButton.attr({class:"node"});
   nodeButton.mouseover(function(){
     this.addClass("active")
@@ -73,35 +73,9 @@
     this.removeClass("active")
   })
 
-  var nodeCount = 0
+  var nodeCount = 1
   nodeButton.click(function(){
-    // When clicked add a shape to the paper canvas
-    // Give each of them a unique id
-    var name = "node" + nodeCount
-    name = paper.use("nodeTemplate")
-    name.attr({class:"node"})
-    name.drag(
-      function (dx, dy, x, y, e) {
-        var xSnap = Snap.snapTo(gridSize, orig.x + dx, 100000000);
-        var ySnap = Snap.snapTo(gridSize, orig.y + dy, 100000000);
-        this.attr({
-          x: xSnap,
-          y: ySnap
-        });
-      },
-      function (x, y, e) {
-        orig.x = e.toElement.x.baseVal.value;
-        orig.y = e.toElement.y.baseVal.value;
-    })
-    name.mouseover(function() {
-      this.addClass('active')
-    }).mouseout(function() {
-      this.removeClass('active')
-    }).mousedown(function() {
-      this.addClass('activeDrag')
-    }).mouseup(function() {
-      this.removeClass('activeDrag')
-    })
+    createNode(nodeCount).transform('t0,0')
     nodeCount++
   })
 
@@ -361,8 +335,8 @@
       //return details
     }
 
-    var node_1 = createNode('1').transform('t0,0')
-    var node_2 = createNode('2').transform('t100,100')
+    //var node_1 = createNode('1').transform('t0,0')
+    //var node_2 = createNode('2').transform('t100,100')
 
 </script>
 
