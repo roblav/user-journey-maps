@@ -52,8 +52,7 @@ function createBtn(name, title, iconTransform, transform, pathArray, onMouseDown
     //this.toggle = !this.toggle
 
     //Grab set of all nodes
-    var allNodes = paper.selectAll(".g-" +
-    "node")
+    var allNodes = paper.selectAll(".g-node")
 
     allNodes.forEach(function(el) {
       el.unmousedown()
@@ -63,7 +62,18 @@ function createBtn(name, title, iconTransform, transform, pathArray, onMouseDown
 
     if(icon.selected){
       // Add mousedown event listener to all nodes
+      //console.log(allNodes)
       allNodes.forEach(function(el) {
+
+        //If name is arrows, test out function
+        if(name==='arrows'){
+          allNodes.forEach(function(el) {
+            el.unmousedown()
+            //Add a class to each el
+            el.addClass('nodejoin-show')
+          })
+        }
+
         el.mousedown(function(event){
           //console.log(this)
           //If a mousedown function has been added to the button, trigger it here
@@ -75,6 +85,8 @@ function createBtn(name, title, iconTransform, transform, pathArray, onMouseDown
     } else{
       allNodes.forEach(function(el) {
         el.unmousedown()
+        //Add a class to each el
+        el.removeClass('nodejoin-show')
         //unmousedown removes the drag method as well so we need to re-apply it here
         el.drag(
           function (dx, dy, x, y, e) {

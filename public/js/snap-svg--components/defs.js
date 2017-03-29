@@ -46,3 +46,14 @@ g.click(function(e){
 })
 
 g.toDefs()
+
+// nodeJoins ################################
+var nodeJoin = paper.circle(0, 0, 10).attr({id:'nodeJoin'});
+nodeJoin.toDefs()
+
+// CREATE A MARKER ARROW ==========================================================
+
+var arrowMarker = paper.path("M10,10 l-10,-10 l12,10 l-12,10").transform("scale(0.2)")
+var arrowMarker1 = paper.path("M10,10 l-10,-10 l12,10 l-12,10").transform("scale(0.2)")
+var marker = arrowMarker.marker(0,0, 15,15, 2,2).attr({class: "arrow"})
+var markerRed = arrowMarker1.marker(0,0, 15,15, 2,2).attr({class: "arrow-red"})

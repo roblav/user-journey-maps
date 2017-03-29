@@ -1,7 +1,7 @@
 .arrow{
   fill: transparent;
-  stroke: #000;
-  stroke-width: 5;
+  stroke: #333;
+  stroke-width: 3;
 }
 
 .arrow.active {
@@ -10,4 +10,14 @@
 
 .arrow:hover{
   cursor: pointer;
+}
+
+.arrow-red {
+  stroke: red;
+}
+.dashed {
+  stroke: red;
+  stroke-width: 2;
+  fill: #333;
+  stroke-dasharray: 3;
 }

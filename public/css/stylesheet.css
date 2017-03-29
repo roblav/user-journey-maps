@@ -1,13 +1,22 @@
 .arrow {
   fill: transparent;
-  stroke: #000;
-  stroke-width: 5; }
+  stroke: #333;
+  stroke-width: 3; }
 
 .arrow.active {
   stroke: #FFBA49; }
 
 .arrow:hover {
   cursor: pointer; }
+
+.arrow-red {
+  stroke: red; }
+
+.dashed {
+  stroke: red;
+  stroke-width: 2;
+  fill: #333;
+  stroke-dasharray: 3; }
 
 form#node-details {
   position: absolute;
@@ -123,7 +132,7 @@ form#node-details {
 
 .node {
   fill: #1B998B;
-  stroke: #000;
+  stroke: rgba(0, 0, 0, 0.3);
   stroke-width: 5; }
 
 .node:hover,
@@ -165,6 +174,18 @@ form#node-details {
   stroke: #000;
   stroke-width: 5;
   stroke-dasharray: 5; }
+
+.node-join {
+  opacity: 0; }
+
+.nodejoin-show .node-join {
+  opacity: 0.5;
+  fill: #f00; }
+
+.nodejoin-show .node-join:hover {
+  opacity: 1;
+  cursor: pointer;
+  fill: #00f; }
 
 .hide {
   opacity: 0.0;

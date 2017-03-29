@@ -1,6 +1,6 @@
 .node{
   fill: #1B998B; //teal
-  stroke: #000;
+  stroke: rgba(0,0,0,0.3);;
   stroke-width: 5;
 }
 
@@ -47,4 +47,19 @@
   stroke: #000;
   stroke-width: 5;
   stroke-dasharray: 5;
+}
+
+.node-join {
+  opacity: 0;
+}
+
+.nodejoin-show .node-join {
+  opacity: 0.5;
+  fill: #f00;
+}
+
+.nodejoin-show .node-join:hover {
+  opacity: 1;
+  cursor: pointer;
+  fill: #00f;
 }
