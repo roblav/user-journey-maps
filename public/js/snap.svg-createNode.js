@@ -110,7 +110,7 @@ function stopArrow(ev, arrow, startPos, dir) {
   //Is the mouse over a node?
   //console.log(node2.getBBox())
   var isOverNode = overNode({ x:ev.offsetX, y:ev.offsetY })
-  console.log(isOverNode)
+  //console.log(isOverNode)
   //Get end point for path
   //remove event listner
   if(isOverNode){
@@ -148,7 +148,7 @@ function overNode(mosPos){
 }
 
 function between(x, min, max) {
-  console.log(x, min, max)
+  //console.log(x, min, max)
   return x >= min && x <= max;
 }
 

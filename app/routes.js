@@ -7,6 +7,7 @@ var browserSync = require('browser-sync');
 var config = require('./config.js');
 var snapSVGutils = require('./snapSVG--utils.js');
 var utils = require('../lib/utils.js');
+var fs = require('fs');
 
 
 var server = require('http').createServer(app);
@@ -41,7 +42,7 @@ var script1 = [
   { type: "path", name: "arrow1", val: "M100,75 l43,0 l-10,-10 l12,10 l-12,10", attr: { class:"arrow" } }
 ]
 
-var grid = snapSVGutils.generateGrid(20, 20, 25, 25)
+var grid = snapSVGutils.generateGrid(50, 50, 25, 25)
 //console.log(grid)
 
 // Add grid to script
@@ -106,6 +107,11 @@ io.on('connection', function(socket) {
 
   socket.on('usermaps--svg', function(data) {
     console.log(data)
+    //save the data out to a file
+    fs.writeFile(__dirname+'/data/test.json', JSON.stringify(data, null, 4), function (err) {
+      if (err) throw err;
+      console.log('Data list saved');
+    });
   });
 
 });
