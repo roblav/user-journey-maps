@@ -1,9 +1,28 @@
 var socket = io();
 
-// When submit button is clicked
-
-$('#submit').on('click', function(){
-  var data = paper.toJSON()
+$('#saveSVG #submit').on('click', function(){
+  //Grab value from input
+  var filename = $('#saveSVG input').val()
+  // When submit button is clicked, save the canvas as a JSON file
+  var data = paper.selectAll('.g-node, .arrow')
+  //var data = paper.innerSVG()
+  console.log(data)
   // Capture all svgSnap data
-  socket.emit('usermaps--svg', data);
+  socket.emit('saveUsermap--svg', data, filename);
 })
+
+$('#loadSVG #submit').on('click', function(){
+  //Grab value from input
+  var filename = $('#loadSVG input').val()
+  // Capture all svgSnap data
+  socket.emit('getUsermap--svg', filename);
+})
+
+socket.on('loadUsermap--svg', function (data) {
+  console.log(data);
+  //Convert the JSON data back into a Snap object
+  //Load this back to the canvas
+  var g = paper.g()
+  g.add(data).attr({id:'g-usermap-1', class:'g-usermap'})
+  //paper.append(data)
+});

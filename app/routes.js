@@ -105,13 +105,25 @@ io.on('connection', function(socket) {
     //console.log('user disconnected');
   });
 
-  socket.on('usermaps--svg', function(data) {
-    console.log(data)
+  socket.on('saveUsermap--svg', function(data, filename) {
+    //console.log(data)
     //save the data out to a file
-    fs.writeFile(__dirname+'/data/test.json', JSON.stringify(data, null, 4), function (err) {
+    fs.writeFile(__dirname+'/data/'+filename+'.json', JSON.stringify(data, null, 4), function (err) {
       if (err) throw err;
       console.log('Data list saved');
     });
   });
+
+
+  socket.on('getUsermap--svg', function(filename) {
+    //console.log(data)
+    //save the data out to a file
+    fs.readFile(__dirname+'/data/'+filename+'.json', function read (err, data) {
+      if (err) throw err;
+      console.log('File found');
+      socket.emit('loadUsermap--svg', JSON.parse(data));
+    });
+  });
+
 
 });
