@@ -68,8 +68,9 @@ form#node-details {
   /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */ }
 
 .g-usermap {
+  fill: transparent;
   stroke: #D7263D;
-  stroke-width: 5;
+  stroke-width: 1;
   stroke-dasharray: 5; }
 
 .col1-2,

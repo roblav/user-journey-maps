@@ -17,7 +17,20 @@ function jsonToSnapSVG(map) {
 
   //Add all nodes to a group
   var g = paper.g()
-  g.add(nodeList[0], nodeList[1]).attr({id:'g-usermap-1', class:'g-usermap'})
+  g.add(nodeList[0], nodeList[1]).attr({id:'g-usermap-1'})
+  g.drag()
 
-  //Find all rects
+  var bbox = g.getBBox();
+  var attr = {
+    "x": bbox.x,
+    "y": bbox.y,
+    "width": bbox.width,
+    "height": bbox.height,
+    "class": 'g-usermap'
+  }
+
+  var rect = paper.rect().attr(attr)
+
+  nodeList[0].before(rect)
+  //g.add(rect)
 }
