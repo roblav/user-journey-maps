@@ -1,0 +1,294 @@
+{% extends "layout--svg.html" %}
+
+{% block main %}
+
+<h1>Map Viewer</h1>
+
+<!-- http://robsneuron.blogspot.co.uk/2013/11/using-snapsvg-to-create-box-that-snaps.html -->
+<form onsubmit="event.preventDefault();formSubmit()" id="node-details" class="hide-form shadow">
+  <div class="arrow-left"></div>
+  <div class="form-group">
+    <label for="js-page_title">Page title:</label>
+    <input id="js-page_title" type="text"></input>
+  </div>
+  <div class="form-group">
+    <label for="js-url">URL:</label>
+    <input id="js-url" type="text"></input>
+  </div>
+  <button>Submit</button>
+</form>
+
+<script>
+
+  // GLOBAL VARIABLES ==========================================================
+
+  var gridSize = 25
+  var makeArrow = {
+    active: false,
+    draw: function(instruction){
+      return paper.path(instruction).attr({class:"arrow"});
+    }
+  }
+  var path  = null;
+
+  // TOOLBOX ==========================================================
+
+  var toolbox = Snap(100, 600)
+  toolbox.attr({id: 'toolbox'})
+  var gr_toolbox = toolbox.g().attr({id:"gr_toolbox"})
+
+  // LABEL - TOOLBOX ==================================================
+  var gr_label = toolbox.g().attr({id:"gr_label"})
+  var label_toggleBtn__bkg = toolbox.rect(0, 0, 100, 30, 0).attr({ class: 'toolbox-label--bkg'})
+  var label_toggleBtn__text = toolbox.text("50%", 15,'Label Template').attr({id:'test', class: 'toolbox-label--text'})
+  gr_label.add(label_toggleBtn__bkg, label_toggleBtn__text)
+
+  gr_label.toDefs()
+
+  toolbox.use("#gr_label").attr({y:0})
+
+  label_toggleBtn__text.attr({ text: 'ToolBox'});
+
+  //Get val for
+  var details = {}
+  details.label = $('.toolbox-label--text').val();
+  //console.log(details.label)
+  //url.node.innerHTML = "URL: "+details.url;
+
+  // TEMPLATES ==================================================
+
+  var nodeTemplate = toolbox.rect(0, 0, 50, 50, 5, 5).attr({id: "nodeTemplate"})
+  nodeTemplate.toDefs()
+  var circleTemplate = toolbox.circle(0, 0, 15, 15).attr({id: "circleTemplate"})
+  circleTemplate.toDefs()
+
+  // NODE BUTTON ==================================================
+
+  var nodeButton = toolbox.use("nodeTemplate").transform('t15,45 s0.5').attr({class:"node"});
+  //nodeButton.attr({class:"node"});
+  nodeButton.mouseover(function(){
+    this.addClass("active")
+  }).mouseout(function(){
+    this.removeClass("active")
+  })
+  //Node list
+  var nodeList
+  var nodeCount = 1
+  nodeButton.click(function(){
+    createNode(nodeCount).transform('t0,0')
+    //Add new node group to node list
+    //Grab a current node list
+    nodeList = paper.selectAll(".g-node")
+    nodeCount++
+    //console.log(allNodes)
+  })
+
+
+  // GRID TOGGLE BUTTON ======================================================
+
+  // ARROW TEMPLATE ==========================================================
+
+  var arrowTemplate = toolbox.path("M0,0 l43,0 l-10,-10 l12,10 l-12,10").attr({id: "arrowTemplate"})
+  arrowTemplate.toDefs()
+  var arrowButton = toolbox.use("arrowTemplate").attr({x: 25, y: 120});
+  arrowButton.attr({class:"arrow"});
+  arrowButton.click(function(){
+    makeArrow.active = !makeArrow.active
+    //console.log(makeArrow.active)
+    this.toggleClass('active')
+  })
+
+  // STAGE ==========================================================
+
+  var paper = Snap(800, 600);
+  paper.attr({id: "canvas1"})
+
+  var orig = {
+    x: 0,
+    y: 0
+  }
+
+  var grid = paper.g().attr({id:"grid", class:"show"});
+
+  {% for item in script %}
+
+    // TEXT ======
+    {% if item.type == "text" %}
+
+      paper.{{ item.type }}({{ item.x }}, {{ item.y }}, "{{ item.val }}")
+
+    // LINE ======
+    {% elif item.type == "line" %}
+
+     {{  "var " + item.name + "=" if item.name }} paper.{{ item.type }}(
+       {{ item.xStart }},
+       {{ item.yStart }},
+       {{ item.xEnd }},
+       {{ item.yEnd }}
+     )
+      // Deal with any attributes
+      {% if item.attr %}
+        {% for prop, value in item.attr %}
+          {{item.name}}.attr({ {{prop}}:"{{value}}" })
+        {% endfor %}
+      {% endif %}
+
+      grid.add( {{item.name}} );
+
+    // RECT ======
+    {% elif item.type == "rect" %}
+
+      {{  "var " + item.name + "=" if item.name }} paper.{{ item.type }}(
+        {{ item.x }},
+        {{ item.y }},
+        {{ item.width }},
+        {{ item.height }},
+        {{ item.rx }},
+        {{ item.ry }}
+      )
+
+      // Deal with any attributes
+      {% if item.attr %}
+        {% for prop, value in item.attr %}
+          {{item.name}}.attr({ {{prop}}:"{{value}}" })
+        {% endfor %}
+      {% endif %}
+
+    // PATH ======
+    {% elif item.type == "path" %}
+
+      {{  "var " + item.name + "=" if item.name }} paper.{{ item.type }}( "{{ item.val }}" )
+
+      // Deal with any attributes
+      {% if item.attr %}
+        {% for prop, value in item.attr %}
+          {{item.name}}.attr({ {{prop}}:"{{value}}" })
+        {% endfor %}
+      {% endif %}
+
+    {% endif %}
+
+
+  {% endfor %}
+
+
+
+  //path1 = paper.line(25,200,200,200).attr( { class:"arrow", markerEnd:marker } );
+
+  //s.{{ script.type }}({{ script.x }}, {{ script.y }}, "{{ script.val }}")
+
+</script>
+
+<script src="public/js/snap.svg-createBtn.js"></script>
+<script src="public/js/snap.svg-createNode.js"></script>
+<script src="public/js/snap-svg--components/defs.js"></script>
+<script src="public/js/snap-svg--components/toggleBtn.js"></script>
+<script src="public/js/snap-svg--components/styleOptions.js"></script>
+<script src="public/js/snap.svg-jsonToSnapSVG.js"></script>
+
+<!--
+<script src="public/js/snap-svg--components/iconEdit.js"></script>
+<script src="public/js/snap-svg--components/iconDelete.js"></script>
+<script src="public/js/snap-svg--components/iconClear.js"></script>
+-->
+
+<script>
+
+  var editCallback = function(el){
+    //console.log(el.node.childNodes)
+    //Select form
+    var editForm = document.getElementById("node-details")
+    editForm.dataUID = el.uid
+    //Get the current node-detail values and populate the form
+    var title_val = el.node.childNodes[1].childNodes[0].innerHTML
+    var url_val = el.node.childNodes[1].childNodes[1].innerHTML
+    var page_title = document.querySelector('input#js-page_title')
+    page_title.value = title_val
+    var page_url = document.querySelector('input#js-url')
+    page_url.value = url_val.substr(5)
+    //Get coords
+    var posX = el.matrix.e + 160
+    var posY = el.matrix.f + 110
+    //Move form to start position
+    editForm.style.left = posX+"px"
+    editForm.style.top = posY+"px"
+    editForm.classList.toggle("show-form")
+    editForm.classList.toggle("hide-form")
+    if($(editForm).hasClass('hide-form')){
+      //console.log('Do something')
+      //Wait 1 second and move form off screen
+      setTimeout(function(){
+        editForm.style.top = "-300px"
+      }, 1000);
+
+    }
+
+  }
+
+  {% for icon in icons %}
+    //Loop over the array creating a group of the paths
+    var pathArray = "{{ icon.path }}".split(',');
+    //TODO
+    // I'm unsure about having the transform as part of the data
+    //Maybe this should be automated from some position settings.
+    // function createBtn(name, title, transform, path)
+    var onMouseDown = '{{ icon.mousedown }}';
+    if(typeof onMouseDown !== 'undefined'){
+      onMouseDown = function(el){
+        {{icon.mousedown|safe}}
+      }
+    }
+    var callback = '{{ icon.iconcallback }}';
+    if(typeof callback !== 'undefined'){
+      callback = function(el){
+        {{icon.iconcallback|safe}}
+      }
+    }
+    //For the edit icon we need a complex function
+    if('{{ icon.name }}'=='pencil'){
+      callback = editCallback;
+    }
+    createBtn('{{ icon.name }}', '{{ icon.title }}','{{ icon.iconTransform }}', '{{ icon.transform }}', pathArray, onMouseDown, callback);
+  {% endfor %}
+
+    //When the form gets submited get the values for url and title
+    function formSubmit() {
+
+      //Get val for
+      var details = {}
+      details.url = $('#node-details #js-url').val();
+      details.pageTitle = $('#node-details #js-page_title').val();
+
+      var el = document.getElementById("node-details");
+      var text_title = document.getElementById('text-title-'+el.dataUID);
+      var text_url = document.getElementById('text-url-'+el.dataUID);
+      text_title.innerHTML = details.pageTitle;
+      text_url.innerHTML = "URL: "+details.url;
+      //Hide form
+      el.classList.toggle("show-form");
+      el.classList.toggle("hide-form");
+      //console.log(text_title.innerHTML);
+      //return details
+    }
+
+    //var node_1 = createNode('1').transform('t0,0')
+    //var node_2 = createNode('2').transform('t100,100')
+
+</script>
+
+<h1>Save your User Map</h1>
+<div class="form-group" id="saveSVG">
+  <label>File name:</label>
+  <input type="text" name="filename" val=""/>
+  <button id="submit">Submit</button>
+</div>
+
+<h1>Load User Map</h1>
+<div class="form-group" id="loadSVG">
+  <label>File name:</label>
+  <input type="text" name="filename" val=""/>
+  <button id="submit">Submit</button>
+</div>
+
+
+{% endblock %}

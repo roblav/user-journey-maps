@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/roblav/jsStarterkit#readme",
   "dependencies": {
+    "nunjucks-includeData": "0.0.9",
     "whatwg-fetch": "1.0.0"
   },
   "devDependencies": {

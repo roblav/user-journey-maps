@@ -18,11 +18,12 @@ $('#loadSVG #submit').on('click', function(){
   socket.emit('getUsermap--svg', filename);
 })
 
-socket.on('loadUsermap--svg', function (data) {
-  console.log(data);
+socket.on('loadUsermap--svg', function (map) {
+  //console.log(map);
+  jsonToSnapSVG(map)
   //Convert the JSON data back into a Snap object
   //Load this back to the canvas
-  var g = paper.g()
-  g.add(data).attr({id:'g-usermap-1', class:'g-usermap'})
+  //var g = paper.g()
+  //g.add(data).attr({id:'g-usermap-1', class:'g-usermap'})
   //paper.append(data)
 });

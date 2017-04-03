@@ -1,4 +1,5 @@
 var nunjucks  = require('nunjucks');
+//var njIncludeData = require('nunjucks-includeData');
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -27,6 +28,8 @@ nunjucks.configure(path.join(__dirname, '/views/'), {
   noCache: true,
   watch: true
 });
+
+//njIncludeData.install(nunjucksEnv);  // Init the extension with the nunjucks environment
 
 // TODO Move images to public directory
 
@@ -79,6 +82,13 @@ app.get('/', function(req, res) {
 
 app.get('/test', function(req, res) {
   res.render('user-maps.html', {script: script});
+});
+
+
+app.get('/map-viewer', function(req, res) {
+
+  res.render('map-viewer.html', {script: script, icons: icons});
+
 });
 
 
