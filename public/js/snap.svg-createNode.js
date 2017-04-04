@@ -193,3 +193,8 @@ function getDirections(startDirection,startPos,endPos) {
   }
   return startPoint+midPoint+endPoint
 }
+
+function createArrow(directions){
+  var p1 = paper.path(directions).attr({class:"arrow", markerEnd:marker});
+  return p1
+}
